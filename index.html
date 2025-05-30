@@ -11,18 +11,120 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Monaco&display=swap');
 
-        :root { /* ... (tus variables CSS sin cambios) ... */ }
+        :root {
+            --color-fondo: #0A0F1A; 
+            --color-fondo-secundario: #1e1e1e;
+            --color-texto: #e0e0e0;
+            --color-primario-original: #00aaff; /* Mantenemos el primario original por si se usa en la terminal */
+            --color-primario-oscuro: #0088CC; /* Nuevo azul oscuro para el tema */
+            --color-acento: #07c407;
+            --color-directorio: #4ec9b0; 
+        }
 
         html { scroll-behavior: smooth; }
-        body { /* ... (tus estilos de body sin cambios) ... */ }
-        .container { /* ... (sin cambios) ... */ }
-        header { /* ... (sin cambios) ... */ }
-        header .container { /* ... (sin cambios) ... */ }
-        header h1 { /* ... (sin cambios) ... */ }
-        @keyframes subtle-glitch { /* ... (sin cambios) ... */ }
-        header p { /* ... (sin cambios) ... */ }
-        header p::after { /* ... (sin cambios) ... */ }
-        @keyframes blink-cursor { /* ... (sin cambios) ... */ }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; 
+            background-color: var(--color-fondo); 
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.01), 
+                rgba(255, 255, 255, 0.01) 1px,
+                transparent 1px,
+                transparent 15px 
+            );
+            color: var(--color-texto);
+            margin: 0; padding: 0; line-height: 1.7; 
+        }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        
+        /* --- HEADER CON ESTILOS ACTUALIZADOS --- */
+        header {
+            background-image: linear-gradient(to bottom, var(--color-fondo-secundario) 20%, #08080A 100%); 
+            padding: 35px 0; 
+            border-bottom: 3px solid var(--color-primario-oscuro); /* Borde con el nuevo azul oscuro */
+            text-align: center;
+            position: relative; 
+            overflow: hidden; 
+            width: 100%; 
+            z-index: 10; 
+        }
+
+        header .container { 
+             max-width: 1000px; margin: auto; padding: 0 20px;
+        }
+
+        header h1 {
+            margin: 0; font-size: 4.5em; 
+            color: var(--color-primario-oscuro); /* Azul más oscuro */
+            text-shadow: 
+                0 0 7px rgba(0, 136, 204, 0.6),  /* Resplandor ajustado a #0088CC */
+                0 0 14px rgba(0, 136, 204, 0.4),
+                0 0 22px rgba(0, 136, 204, 0.2);
+            letter-spacing: 1.5px; 
+            animation: subtle-glitch 7s infinite alternate ease-in-out; 
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace; 
+        }
+
+        @keyframes subtle-glitch {
+            0%, 100% { 
+                transform: skewX(0deg) translateX(0); 
+                opacity: 1;
+                text-shadow: 
+                    0 0 7px rgba(0, 136, 204, 0.6), /* Azul oscuro base */
+                    0 0 14px rgba(0, 136, 204, 0.4),
+                    0 0 22px rgba(0, 136, 204, 0.2);
+            }
+            48% { 
+                transform: skewX(0deg) translateX(0); 
+                opacity: 1;
+                 text-shadow: 
+                    0 0 7px rgba(0, 136, 204, 0.6),
+                    0 0 14px rgba(0, 136, 204, 0.4),
+                    0 0 22px rgba(0, 136, 204, 0.2);
+            }
+            50% { 
+                transform: skewX(-0.5deg) translateX(-2px); 
+                opacity: 0.95;
+                text-shadow: 
+                    2px 2px 0px var(--color-acento),  /* Verde offset */
+                    -2px -2px 0px #006699, /* Un azul aún más oscuro para el otro offset */
+                    0 0 8px rgba(0, 136, 204, 0.5); 
+            }
+            51% { 
+                transform: skewX(0.3deg) translateX(1px);
+                opacity: 0.98;
+                text-shadow:
+                    1px -1px 0px var(--color-acento), 
+                    -1px 1px 0px #0077b3, /* Azul intermedio */
+                    0 0 6px rgba(7, 196, 7, 0.4); 
+            }
+            53% { 
+                transform: skewX(0deg) translateX(0); 
+                opacity: 1;
+                text-shadow: 
+                    0 0 7px rgba(0, 136, 204, 0.6),
+                    0 0 14px rgba(0, 136, 204, 0.4),
+                    0 0 22px rgba(0, 136, 204, 0.2);
+            }
+        }
+        /* --- FIN HEADER ESTILOS ACTUALIZADOS --- */
+
+
+        header p {
+            margin: 12px 0 0; font-size: 1.4em; color: var(--color-texto); font-style: italic;
+            display: inline-block; position: relative;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace; 
+        }
+
+        header p::after {
+            content: '_'; font-weight: bold; margin-left: 8px; color: var(--color-acento); 
+            animation: blink-cursor 1.2s step-end infinite; 
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
        
         section {
             padding: 60px 20px; 
@@ -33,38 +135,113 @@
         }
         .hidden-section {
             opacity: 0; max-height: 0; 
-            padding-top: 0 !important; /* Asegurar que el padding se vaya al ocultar */
-            padding-bottom: 0 !important;
+            padding-top: 0; padding-bottom: 0;
             transform: translateY(30px); 
-            border-bottom-width: 0 !important; /* Por si alguna vez se reintroduce un borde base */
+            border-bottom-width: 0 !important;
         }
-        h2 { /* ... (sin cambios) ... */ }
-        .section-content-capsule { /* ... (sin cambios) ... */ }
-        .skill-category, .project-card, #sobre-mi img { /* ... (sin cambios) ... */ }
-        #sobre-mi .section-content-capsule { /* ... (sin cambios) ... */ }
-        #sobre-mi img { /* ... (sin cambios) ... */ }
-        #sobre-mi img:hover { /* ... (sin cambios) ... */ }
-        #sobre-mi .about-me-text p { /* ... (sin cambios) ... */ } 
-        .skills-grid { /* ... (sin cambios) ... */ } 
-        #habilidades .skill-category { /* ... (sin cambios) ... */ }
-        #habilidades .skill-category:hover { /* ... (sin cambios) ... */ }
-        #habilidades .skill-category h3 { /* ... (sin cambios) ... */ }
-        #habilidades .skill-category ul { /* ... (sin cambios) ... */ }
-        #habilidades .skill-category ul li { /* ... (sin cambios) ... */ }
-        #habilidades .skill-category ul li:hover { /* ... (sin cambios) ... */ }
-        #proyectos .section-content-capsule { /* ... (sin cambios) ... */ }
-        #proyectos .project-card { /* ... (sin cambios) ... */ }
-        #proyectos .project-card:hover { /* ... (sin cambios) ... */ }
-        #proyectos .project-card h3 { /* ... (sin cambios) ... */ }
-        .project-card p { /* ... (sin cambios) ... */ }
-        .tags { /* ... (sin cambios) ... */ }
-        .tag { /* ... (sin cambios) ... */ }
-        #contacto .section-content-capsule p { /* ... (sin cambios) ... */ }
-        .contact-links { /* ... (sin cambios) ... */ }
-        .contact-links a { /* ... (sin cambios) ... */ }
-        .contact-links a:hover { /* ... (sin cambios) ... */ }
-        section:not(.hidden-section) h2:hover { /* ... (sin cambios) ... */ }
-        @media (max-width: 768px) { /* ... (sin cambios, aunque esta detección se hará ahora también en JS) ... */ }
+        h2 { 
+            text-align: center; color: var(--color-primario-oscuro); /* Títulos de sección con azul oscuro */
+            font-size: 2.2em; 
+            margin-bottom: 30px; 
+            transition: color 0.3s ease, text-shadow 0.3s ease; 
+            font-family: 'Inter', sans-serif; 
+            font-weight: 600;
+        }
+        
+        .section-content-capsule {
+            background-color: var(--color-fondo-secundario);
+            padding: 30px; border-radius: 16px; 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.03); 
+        }
+
+        .skill-category, .project-card, #sobre-mi img {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out, border-left-color 0.3s ease-in-out;
+        }
+
+        #sobre-mi .section-content-capsule { display: flex; align-items: center; gap: 30px; }
+        #sobre-mi img { 
+            width: 150px; height: 150px; 
+            border-radius: 50%; border: 3px solid var(--color-primario-oscuro); 
+            flex-shrink: 0;
+        }
+        #sobre-mi img:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--color-primario-oscuro); } 
+        #sobre-mi .about-me-text p { font-weight: 400; font-size: 1.05em; margin-bottom: 0; } 
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; } 
+        #habilidades .skill-category { 
+            background-color: #272727; 
+            padding: 20px; 
+            border-radius: 10px; border-left: 5px solid var(--color-acento); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
+        }
+        #habilidades .skill-category:hover {
+            transform: translateY(-5px) scale(1.02); 
+            border-left-color: var(--color-primario-oscuro); 
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.25); 
+        }
+        #habilidades .skill-category h3 { 
+            margin-top: 0; margin-bottom: 15px; color: var(--color-acento);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.15em;
+        }
+        #habilidades .skill-category ul { list-style-type: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        #habilidades .skill-category ul li { 
+            background-color: var(--color-fondo); 
+            color: var(--color-texto); padding: 8px 18px; 
+            border-radius: 25px; border: 1px solid rgba(0, 136, 204, 0.3); 
+            font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.9em;
+            margin-bottom: 0; 
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        #habilidades .skill-category ul li:hover {
+            background-color: var(--color-primario-oscuro); color: var(--color-fondo-secundario); 
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 10px rgba(0, 136, 204, 0.4);
+        }
+        
+        #proyectos .section-content-capsule { display: grid; gap: 20px; }
+        #proyectos .project-card { 
+            background-color: #272727; 
+            border-radius: 10px; 
+            padding: 20px; margin-bottom: 0; 
+            border: 1px solid #333; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #proyectos .project-card:hover {
+            transform: translateY(-5px); border-color: var(--color-primario-oscuro); 
+            box-shadow: 0 10px 25px rgba(0, 136, 204, 0.3); 
+        }
+        #proyectos .project-card h3 { font-size: 1.25em; color: var(--color-primario-oscuro); }
+        .project-card p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1em; }
+        .tags { margin-top: 15px; }
+        .tag { display: inline-block; background-color: #333; color: var(--color-acento); padding: 5px 10px; border-radius: 5px; font-size: 0.9em; margin-right: 5px; margin-bottom: 5px; font-family: 'Inter', sans-serif; font-weight: 500;}
+        
+        #contacto .section-content-capsule p { 
+            font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.1em; 
+            text-align: center; margin-bottom: 25px; 
+        }
+        .contact-links { text-align: center; margin-top: 0; }
+        .contact-links a { 
+            border-radius: 25px; padding: 10px 25px; font-weight: 500;
+            display: inline-block; margin: 0 15px; 
+            background-color: var(--color-primario-oscuro); color: #f0f0f0; 
+            text-decoration: none; 
+            transition: background-color 0.3s ease, transform 0.2s ease; 
+            font-family: 'Inter', sans-serif;
+        }
+        .contact-links a:hover { 
+            background-color: var(--color-acento); 
+            color: var(--color-fondo-secundario); 
+            transform: translateY(-2px) scale(1.05); 
+            box-shadow: 0 4px 12px rgba(7, 196, 7, 0.4); 
+        }
+
+        section:not(.hidden-section) h2:hover { color: var(--color-acento); text-shadow: 0 0 8px var(--color-acento); }
+
+        @media (max-width: 768px) { 
+            header h1 { font-size: 3em; } 
+            header p { font-size: 1.2em; }
+            #sobre-mi .section-content-capsule { flex-direction: column; text-align: center; } 
+        }
 
         #terminal-section { 
             transition: opacity 0.4s ease-out, max-height 0.5s ease-out, 
@@ -80,20 +257,35 @@
             pointer-events: none;
             border-bottom-width: 0 !important;
         }
-        .terminal-toggle-button { /* ... (sin cambios) ... */ }
-        .terminal-toggle-button:hover { /* ... (sin cambios) ... */ }
-        
-        /* NUEVO: Clase para ocultar elementos específicamente en móvil/táctil por JS */
-        .mobile-hidden {
-            display: none !important;
+        .terminal-toggle-button {
+            display: block; margin: 0 auto 20px auto; padding: 8px 15px;
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9em;
+            color: var(--color-texto); background-color: var(--color-fondo-secundario);
+            border: 1px solid var(--color-primario-oscuro); 
+            border-radius: 5px;
+            cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;
+            z-index: 100; position: relative; 
         }
+        .terminal-toggle-button:hover { background-color: var(--color-primario-oscuro); color: var(--color-fondo-secundario); }
 
-        #terminal-container { /* ... (sin cambios) ... */ }
-        #terminal { /* ... (sin cambios) ... */ } 
-        main.container > section:not(#terminal-section) { /* ... (sin cambios) ... */ }
-        footer { /* ... (sin cambios) ... */ }
-        footer .container-footer-content { /* ... (sin cambios) ... */ }
-        footer p { /* ... (sin cambios) ... */ }
+        #terminal-container { 
+            background-color: var(--color-fondo-secundario); padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 0 -1px 1px rgba(0, 0, 0, 0.2);      
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            position: relative; z-index: 5; 
+        }
+        #terminal { height: 450px; width: 100%; font-family: 'Monaco', 'Consolas', 'Courier New', monospace !important; } 
+        
+        main.container > section:not(#terminal-section) { position: relative; z-index: 2; }
+
+        footer { 
+            text-align: center; padding: 20px 0; 
+            background-color: var(--color-fondo-secundario); 
+            width: 100%; position: relative; z-index: 10; 
+        }
+        footer .container-footer-content { max-width: 1000px; margin: auto; padding: 0 20px; }
+        footer p { font-family: 'Monaco', 'Consolas', 'Courier New', monospace; }
     </style>
 </head>
 <body>
@@ -106,7 +298,7 @@
     </header>
 
     <main class="container">
-        <button id="toggleTerminalBtn" class="terminal-toggle-button">Terminal</button>
+        <button id="toggleTerminalBtn" class="terminal-toggle-button">Terminal >_</button>
 
         <section id="terminal-section"> 
             <div id="terminal-container">
@@ -182,222 +374,227 @@
     </footer>
 
     <script>
+    // El bloque <script> es el mismo que el de la versión anterior que funcionaba perfectamente.
+    // (La que te proporcioné en la respuesta que empezaba con "¡Entendido! Qué fastidio que se haya roto de nuevo...")
+    // Y que luego fue confirmada por ti como "vale este si esta perfecto"
     document.addEventListener('DOMContentLoaded', function () {
-        const termElement = document.getElementById('terminal');
+        const term = new Terminal({
+            cursorBlink: true, convertEol: true,
+            fontFamily: `'Monaco', 'Consolas', 'Courier New', monospace`, 
+            theme: {
+                background: '#1e1e1e', foreground: '#e0e0e0',
+                cursor: 'rgba(0, 170, 255, 0.5)', // Este azul es el primario original
+                selectionBackground: 'rgba(255, 255, 255, 0.3)',
+                brightGreen: 'var(--color-acento)', 
+                brightBlue: 'var(--color-primario-original)', // xterm usará el azul brillante original
+                cyan: 'var(--color-directorio)' 
+            }
+        });
+        term.open(document.getElementById('terminal'));
+
+        const fileSystem = {
+            '~': {
+                type: 'directory',
+                content: {
+                    'bienvenido.txt': { type: 'file', content: 'Bienvenido al portafolio interactivo de Brayan Garcia.\nUsa \'help\' para ver los comandos disponibles.\nExplora el sistema de archivos con \'ls\', \'cd\' y \'cat\'.' },
+                    'documentos': { type: 'directory', content: {
+                            'sobre_brayan.txt': { type: 'file', content: 'Información sobre Brayan Garcia:\nSoy un profesional técnico en informática con formación especializada en ciberseguridad...\n\n(Para más detalles visuales, usa el comando: about)' },
+                            'competencias_tecnicas.txt': { type: 'file', content: 'Resumen de Competencias Técnicas de Brayan Garcia:\n\n* Seguridad y Operaciones...\n\n(Para una vista detallada, usa el comando: skills)' }
+                        }
+                    },
+                    'proyectos_info': { type: 'directory', content: { 'Maquina_Virtual_Vulnerable_CTF.md': { type: 'file', content: '## Proyecto: Máquina Virtual Vulnerable...\n\n(Para una vista general de proyectos, usa el comando: projects)'} } },
+                    'CV': { type: 'directory', content: { 'CV_Brayan_Garcia.pdf': { type: 'file', content: 'Curriculum Vitae de Brayan Garcia.\nPara descargar este archivo, usa el comando: download cv' } } }
+                }
+            }
+        };
+        let currentPath = ['~']; 
+
+        function resolvePath(pathStr) {
+            let newPathSegments;
+            if (!pathStr || pathStr === '.' || pathStr === '') { return [...currentPath]; }
+            if (pathStr.startsWith('/')) { 
+                newPathSegments = pathStr.split('/').filter(p => p.length > 0); 
+                if (newPathSegments.length === 0 || newPathSegments[0] !== '~') { newPathSegments.unshift('~'); }
+            } else { 
+                newPathSegments = [...currentPath];
+                const segments = pathStr.split('/').filter(p => p.length > 0);
+                for (const segment of segments) {
+                    if (segment === '..') {
+                        if (newPathSegments.length > 1) newPathSegments.pop(); 
+                    } else { newPathSegments.push(segment); }
+                }
+            }
+            return newPathSegments;
+        }
+
+        function getAtPath(pathSegments) {
+            if (!pathSegments || pathSegments.length === 0) return null;
+            if (pathSegments[0] !== '~' || !fileSystem['~']) return null; 
+            let currentLevel = fileSystem['~']; 
+            if (pathSegments.length === 1 && pathSegments[0] === '~') { return currentLevel; }
+            for (let i = 1; i < pathSegments.length; i++) { 
+                const segment = pathSegments[i];
+                if (currentLevel && currentLevel.type === 'directory' && currentLevel.content && currentLevel.content[segment]) {
+                    currentLevel = currentLevel.content[segment];
+                } else { return null; }
+            }
+            return currentLevel;
+        }
+        
+        function formatPath(pathSegments) {
+             if (!Array.isArray(pathSegments) || pathSegments.length === 0) {
+                console.error("formatPath: pathSegments inválido:", pathSegments); 
+                return "?"; 
+             }
+             if (pathSegments.length === 1 && pathSegments[0] === '~') return '~';
+             return pathSegments.join('/'); 
+        }
+
+        function unlockSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section && section.classList.contains('hidden-section')) {
+                section.classList.remove('hidden-section');
+                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                return true;
+            }
+            return false;
+        }
+        
+        const toggleBtn = document.getElementById('toggleTerminalBtn');
         const terminalSection = document.getElementById('terminal-section');
-        const toggleTerminalBtn = document.getElementById('toggleTerminalBtn');
-        const contentSectionIds = ['sobre-mi', 'habilidades', 'proyectos', 'contacto', 'footer'];
-        let term; // Declarar term aquí para que sea accesible en el scope correcto
 
-        // --- Detección de Móvil/Táctil ---
-        const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
-        const isSmallScreen = window.innerWidth < 768; // Puedes ajustar este breakpoint
-
-        if (isTouchDevice || isSmallScreen) {
-            // Experiencia Móvil/Táctil: Ocultar terminal y botón, mostrar contenido
-            if (terminalSection) terminalSection.classList.add('mobile-hidden');
-            if (toggleTerminalBtn) toggleTerminalBtn.classList.add('mobile-hidden');
-
-            contentSectionIds.forEach(id => {
-                const section = document.getElementById(id);
-                if (section && section.classList.contains('hidden-section')) {
-                    section.classList.remove('hidden-section');
-                    // La animación de entrada se activará al quitar la clase .hidden-section
-                    // gracias a las transiciones definidas en la clase 'section'
+        function toggleTerminalVisibility(forceHide = false) {
+            const isCurrentlyCollapsed = terminalSection.classList.contains('terminal-collapsed');
+            
+            if (forceHide) { 
+                if (!isCurrentlyCollapsed) {
+                    terminalSection.classList.add('terminal-collapsed');
                 }
-            });
-        } else {
-            // Experiencia de Escritorio: Inicializar y configurar la terminal interactiva
-            term = new Terminal({ // Inicializar term aquí para escritorio
-                cursorBlink: true, convertEol: true,
-                fontFamily: `'Monaco', 'Consolas', 'Courier New', monospace`, 
-                theme: {
-                    background: '#1e1e1e', foreground: '#e0e0e0',
-                    cursor: 'rgba(0, 170, 255, 0.5)',
-                    selectionBackground: 'rgba(255, 255, 255, 0.3)',
-                    brightGreen: 'var(--color-acento)', 
-                    brightBlue: 'var(--color-primario-original)',
-                    cyan: 'var(--color-directorio)' 
-                }
-            });
-            term.open(termElement);
-
-            const fileSystem = { /* ... (Tu fileSystem completo aquí) ... */ 
-                '~':{type:'directory',content:{'bienvenido.txt':{type:'file',content:'Bienvenido al portafolio interactivo de Brayan Garcia.\nUsa \'help\' para ver los comandos disponibles.\nExplora el sistema de archivos con \'ls\', \'cd\' y \'cat\'.'},'documentos':{type:'directory',content:{'sobre_brayan.txt':{type:'file',content:'Información sobre Brayan Garcia:\nSoy un profesional técnico en informática con formación especializada en ciberseguridad...\n\n(Para más detalles visuales, usa el comando: about)'},'competencias_tecnicas.txt':{type:'file',content:'Resumen de Competencias Técnicas de Brayan Garcia:\n\n* Seguridad y Operaciones...\n\n(Para una vista detallada, usa el comando: skills)'}}},'proyectos_info':{type:'directory',content:{'Maquina_Virtual_Vulnerable_CTF.md':{type:'file',content:'## Proyecto: Máquina Virtual Vulnerable...\n\n(Para una vista general de proyectos, usa el comando: projects)'}}},'CV':{type:'directory',content:{'CV_Brayan_Garcia.pdf':{type:'file',content:'Curriculum Vitae de Brayan Garcia.\nPara descargar este archivo, usa el comando: download cv'}}}}}}
-            };
-            let currentPath = ['~']; 
-
-            function resolvePath(pathStr) { /* ... (Tu función resolvePath completa) ... */ 
-                 let newPathSegments;
-                if (!pathStr || pathStr === '.' || pathStr === '') { return [...currentPath]; }
-                if (pathStr.startsWith('/')) { 
-                    newPathSegments = pathStr.split('/').filter(p => p.length > 0); 
-                    if (newPathSegments.length === 0 || newPathSegments[0] !== '~') { newPathSegments.unshift('~'); }
-                } else { 
-                    newPathSegments = [...currentPath];
-                    const segments = pathStr.split('/').filter(p => p.length > 0);
-                    for (const segment of segments) {
-                        if (segment === '..') {
-                            if (newPathSegments.length > 1) newPathSegments.pop(); 
-                        } else { newPathSegments.push(segment); }
-                    }
-                }
-                return newPathSegments;
-            }
-            function getAtPath(pathSegments) { /* ... (Tu función getAtPath completa) ... */
-                if (!pathSegments || pathSegments.length === 0) return null;
-                if (pathSegments[0] !== '~' || !fileSystem['~']) return null; 
-                let currentLevel = fileSystem['~']; 
-                if (pathSegments.length === 1 && pathSegments[0] === '~') { return currentLevel; }
-                for (let i = 1; i < pathSegments.length; i++) { 
-                    const segment = pathSegments[i];
-                    if (currentLevel && currentLevel.type === 'directory' && currentLevel.content && currentLevel.content[segment]) {
-                        currentLevel = currentLevel.content[segment];
-                    } else { return null; }
-                }
-                return currentLevel;
-            }
-            function formatPath(pathSegments) { /* ... (Tu función formatPath completa) ... */
-                if (!Array.isArray(pathSegments) || pathSegments.length === 0) {
-                    console.error("formatPath: pathSegments inválido:", pathSegments); 
-                    return "?"; 
-                }
-                if (pathSegments.length === 1 && pathSegments[0] === '~') return '~';
-                return pathSegments.join('/'); 
-            }
-            function unlockSection(sectionId) { /* ... (Tu función unlockSection completa) ... */ 
-                const section = document.getElementById(sectionId);
-                if (section && section.classList.contains('hidden-section')) {
-                    section.classList.remove('hidden-section');
-                    setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-                    return true;
-                }
-                return false;
+            } else { 
+                terminalSection.classList.toggle('terminal-collapsed');
             }
             
-            // Lógica para ocultar/mostrar terminal (solo para escritorio)
-            function toggleTerminalVisibility(forceHide = false) {
-                const isCurrentlyCollapsed = terminalSection.classList.contains('terminal-collapsed');
-                if (forceHide) { 
-                    if (!isCurrentlyCollapsed) terminalSection.classList.add('terminal-collapsed');
-                } else { 
-                    terminalSection.classList.toggle('terminal-collapsed');
-                }
-                if (!terminalSection.classList.contains('terminal-collapsed') && !forceHide) { 
-                    if (term && term.textarea) { 
-                        setTimeout(() => {
-                            term.focus();
-                            if(currentLine === '' && typeof dynamicPrompt !== 'undefined') writePrompt(); 
-                        }, 50); 
-                    }
-                }
-            }
-
-            if (toggleTerminalBtn) {
-                toggleTerminalBtn.addEventListener('click', () => toggleTerminalVisibility());
-            }
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') { 
-                    event.preventDefault(); 
-                    toggleTerminalVisibility();
-                }
-            });
-            
-            const comandos = { /* ... (Tu objeto comandos completo, incluyendo 'exit') ... */
-                'help': { output: `\r\nIniciando protocolo de ayuda...\n\r\n\r  \x1b[1;32mComandos de Misión (Desbloqueo de Secciones):\x1b[0m\n\r  \x1b[1;34mabout\x1b[0m       - Desbloquea información personal.\n\r  \x1b[1;34mskills\x1b[0m      - Revela el arsenal de competencias técnicas.\n\r  \x1b[1;34mprojects\x1b[0m    - Expone los proyectos de ciberseguridad.\n\r  \x1b[1;34mcontact\x1b[0m     - Obtiene los canales de comunicación seguros.\n\r  \x1b[1;34mall\x1b[0m         - Desclasifica todos los archivos a la vez.\n\r\n\r  \x1b[1;32mComandos de Navegación (Sistema de Archivos):\x1b[0m\n\r  \x1b[1;34mls\x1b[0m [ruta]   - Lista archivos y directorios.\n\r  \x1b[1;34mcd\x1b[0m <directorio> - Cambia al directorio especificado.\n\r  \x1b[1;34mcat\x1b[0m <archivo>  - Muestra el contenido de un archivo.\n\r\n\r  \x1b[1;32mComandos de Sistema:\x1b[0m\n\r  \x1b[1;34mdownload cv\x1b[0m - Inicia la descarga del CV en formato PDF.\n\r  \x1b[1;34mclear\x1b[0m       - Limpia la pantalla de la terminal.\n\r  \x1b[1;34mexit\x1b[0m        - Oculta la terminal (o usa la tecla Esc).\n\r` },
-                'about': { output: `\r\nAccediendo a datos personales... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Sobre Mí\'...`, unlocks: 'sobre-mi' },
-                'skills': { output: `\r\nAnalizando competencias técnicas... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Competencias Técnicas\'...`, unlocks: 'habilidades' },
-                'projects': { output: `\r\nRecuperando historial de operaciones... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Proyectos de Ciberseguridad\'...`, unlocks: 'proyectos' },
-                'contact': { output: `\r\nEstableciendo canales de comunicación... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Contacto\'...`, unlocks: 'contacto' },
-                'all': { output: `\r\nEjecutando protocolo de desclasificación total... \x1b[1;31m[ADVERTENCIA]\x1b[0m\n\rAcceso masivo concedido.`, action: () => { Object.values(comandos).forEach(cmdDef => { if(cmdDef.unlocks) unlockSection(cmdDef.unlocks); }); const allUnlocked = ['sobre-mi', 'habilidades', 'proyectos', 'contacto'].every(id => { const el = document.getElementById(id); return el && !el.classList.contains('hidden-section'); }); if(allUnlocked) { const footer = document.getElementById('footer'); if (footer && footer.classList.contains('hidden-section')) { unlockSection('footer'); } } writePrompt(); } },
-                'clear': { action: () => { term.clear(); writePrompt(); } },
-                'ls': { action: (args) => { const pathArg = args.length > 0 ? args.join(' ') : '.'; const targetPathSegments = resolvePath(pathArg); const targetDir = getAtPath(targetPathSegments); let output = ''; if (targetDir && targetDir.type === 'directory') { const items = Object.keys(targetDir.content); if (items.length === 0) { output = '(directorio vacío)'; }  else { items.forEach(item => { if (targetDir.content[item].type === 'directory') { output += `\x1b[1;36m${item}/\x1b[0m  `; }  else { output += `${item}  `; } }); } } else { output = `ls: no se puede acceder a '${pathArg}': No es un directorio o no existe`; } term.writeln('\r\n' + output.trim()); writePrompt(); } },
-                'cd': { action: (args) => { let output; if (args.length === 0) { output = "cd: falta operando. Uso: cd <directorio>"; }  else { const targetPath = args.join(' '); const newPathSegments = resolvePath(targetPath); const targetDir = getAtPath(newPathSegments); if (targetDir && targetDir.type === 'directory') { currentPath = newPathSegments; updatePromptText();  output = `Cambiado al directorio: ${formatPath(currentPath)}`; } else { output = `cd: ${targetPath}: No es un directorio o no existe`; } } term.writeln('\r\n' + output); writePrompt(); } },
-                'cat': { action: (args) => { let output; if (args.length === 0) { output = "cat: falta operando de archivo. Uso: cat <archivo>"; }  else { const filePath = args.join(' '); const targetPathSegments = resolvePath(filePath); const targetFile = getAtPath(targetPathSegments); if (targetFile && targetFile.type === 'file') { output = targetFile.content || '(archivo vacío)'; }  else if (targetFile && targetFile.type === 'directory') { output = `cat: ${filePath}: Es un directorio`; }  else { output = `cat: ${filePath}: No existe el archivo o directorio`; } } term.writeln('\r\n' + output); writePrompt(); } },
-                'download': { action: (args) => { if (args.length > 0 && args[0].toLowerCase() === 'cv') { const cvFileName = 'CV_Brayan_Garcia.pdf';  term.writeln(`\r\nIniciando descarga de ${cvFileName}...`); const link = document.createElement('a'); link.href = cvFileName; link.download = cvFileName;  document.body.appendChild(link); link.click(); document.body.removeChild(link); setTimeout(() => { term.write('\r\nSi la descarga no comenzó, verifica que el archivo CV esté en la misma carpeta que index.html.'); }, 1500);  } else { term.writeln('\r\nUso: download cv'); } setTimeout(writePrompt, 1600); } },
-                'exit': { action: () => { term.writeln('\r\nCerrando terminal...'); toggleTerminalVisibility(true); } }
-             };
-
-            let currentLine = '';
-            let dynamicPrompt = `\r\n\x1b[1;32mvisitor@Brayan_Garcia-portfolio\x1b[0m:\x1b[1;34m${formatPath(currentPath)}$\x1b[0m `;
-            
-            function updatePromptText() {
-                dynamicPrompt = `\r\n\x1b[1;32mvisitor@Brayan_Garcia-portfolio\x1b[0m:\x1b[1;34m${formatPath(currentPath)}$\x1b[0m `;
-            }
-
-            function writePrompt() {
-                if (terminalSection && !terminalSection.classList.contains('terminal-collapsed')) {
-                    currentLine = ''; 
-                    term.write(dynamicPrompt);
-                    setTimeout(() => {
-                        if (term && term.textarea && !terminalSection.classList.contains('terminal-collapsed')) {
-                            term.focus(); 
-                            term.scrollToBottom(); 
+            if (!terminalSection.classList.contains('terminal-collapsed') && !forceHide) { 
+                if (term && term.textarea) { 
+                     setTimeout(() => {
+                        term.focus();
+                        if(currentLine === '' && typeof dynamicPrompt !== 'undefined') { 
+                            writePrompt(); 
                         }
-                    }, 0);
+                     }, 50); 
                 }
             }
-            
-            term.writeln('\x1b[1;32mBienvenido al Portafolio Interactivo de Brayan Garcia.\x1b[0m');
-            term.writeln('Sistema iniciado. Esperando comandos...');
-            term.writeln('Puedes ocultar/mostrar esta terminal con la tecla \x1b[1;33mEsc\x1b[0m, el botón, o el comando \x1b[1;33mexit\x1b[0m.');
-            writePrompt();
+        }
 
-            term.onKey(({ key, domEvent }) => {
-                if (terminalSection && terminalSection.classList.contains('terminal-collapsed')) {
-                    return; 
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => toggleTerminalVisibility());
+        }
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') { 
+                event.preventDefault(); 
+                toggleTerminalVisibility();
+            }
+        });
+
+        const comandos = {
+            'help': { output: `\r\nIniciando protocolo de ayuda...\n\r\n\r  \x1b[1;32mComandos de Misión (Desbloqueo de Secciones):\x1b[0m\n\r  \x1b[1;34mabout\x1b[0m       - Desbloquea información personal.\n\r  \x1b[1;34mskills\x1b[0m      - Revela el arsenal de competencias técnicas.\n\r  \x1b[1;34mprojects\x1b[0m    - Expone los proyectos de ciberseguridad.\n\r  \x1b[1;34mcontact\x1b[0m     - Obtiene los canales de comunicación seguros.\n\r  \x1b[1;34mall\x1b[0m         - Desclasifica todos los archivos a la vez.\n\r\n\r  \x1b[1;32mComandos de Navegación (Sistema de Archivos):\x1b[0m\n\r  \x1b[1;34mls\x1b[0m [ruta]   - Lista archivos y directorios.\n\r  \x1b[1;34mcd\x1b[0m <directorio> - Cambia al directorio especificado.\n\r  \x1b[1;34mcat\x1b[0m <archivo>  - Muestra el contenido de un archivo.\n\r\n\r  \x1b[1;32mComandos de Sistema:\x1b[0m\n\r  \x1b[1;34mdownload cv\x1b[0m - Inicia la descarga del CV en formato PDF.\n\r  \x1b[1;34mclear\x1b[0m       - Limpia la pantalla de la terminal.\n\r  \x1b[1;34mexit\x1b[0m        - Oculta la terminal (o usa la tecla Esc).\n\r` },
+            'about': { output: `\r\nAccediendo a datos personales... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Sobre Mí\'...`, unlocks: 'sobre-mi' },
+            'skills': { output: `\r\nAnalizando competencias técnicas... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Competencias Técnicas\'...`, unlocks: 'habilidades' },
+            'projects': { output: `\r\nRecuperando historial de operaciones... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Proyectos de Ciberseguridad\'...`, unlocks: 'proyectos' },
+            'contact': { output: `\r\nEstableciendo canales de comunicación... \x1b[1;32m[ACCESO CONCEDIDO]\x1b[0m\n\rDesbloqueando sección \'Contacto\'...`, unlocks: 'contacto' },
+            'all': { output: `\r\nEjecutando protocolo de desclasificación total... \x1b[1;31m[ADVERTENCIA]\x1b[0m\n\rAcceso masivo concedido.`, action: () => { Object.values(comandos).forEach(cmdDef => { if(cmdDef.unlocks) unlockSection(cmdDef.unlocks); }); const allUnlocked = ['sobre-mi', 'habilidades', 'proyectos', 'contacto'].every(id => { const el = document.getElementById(id); return el && !el.classList.contains('hidden-section'); }); if(allUnlocked) { const footer = document.getElementById('footer'); if (footer && footer.classList.contains('hidden-section')) { unlockSection('footer'); } } writePrompt(); } },
+            'clear': { action: () => { term.clear(); writePrompt(); } },
+            'ls': { action: (args) => { const pathArg = args.length > 0 ? args.join(' ') : '.'; const targetPathSegments = resolvePath(pathArg); const targetDir = getAtPath(targetPathSegments); let output = ''; if (targetDir && targetDir.type === 'directory') { const items = Object.keys(targetDir.content); if (items.length === 0) { output = '(directorio vacío)'; }  else { items.forEach(item => { if (targetDir.content[item].type === 'directory') { output += `\x1b[1;36m${item}/\x1b[0m  `; }  else { output += `${item}  `; } }); } } else { output = `ls: no se puede acceder a '${pathArg}': No es un directorio o no existe`; } term.writeln('\r\n' + output.trim()); writePrompt(); } },
+            'cd': { action: (args) => { let output; if (args.length === 0) { output = "cd: falta operando. Uso: cd <directorio>"; }  else { const targetPath = args.join(' '); const newPathSegments = resolvePath(targetPath); const targetDir = getAtPath(newPathSegments); if (targetDir && targetDir.type === 'directory') { currentPath = newPathSegments; updatePromptText();  output = `Cambiado al directorio: ${formatPath(currentPath)}`; } else { output = `cd: ${targetPath}: No es un directorio o no existe`; } } term.writeln('\r\n' + output); writePrompt(); } },
+            'cat': { action: (args) => { let output; if (args.length === 0) { output = "cat: falta operando de archivo. Uso: cat <archivo>"; }  else { const filePath = args.join(' '); const targetPathSegments = resolvePath(filePath); const targetFile = getAtPath(targetPathSegments); if (targetFile && targetFile.type === 'file') { output = targetFile.content || '(archivo vacío)'; }  else if (targetFile && targetFile.type === 'directory') { output = `cat: ${filePath}: Es un directorio`; }  else { output = `cat: ${filePath}: No existe el archivo o directorio`; } } term.writeln('\r\n' + output); writePrompt(); } },
+            'download': { action: (args) => { if (args.length > 0 && args[0].toLowerCase() === 'cv') { const cvFileName = 'CV_Brayan_Garcia.pdf';  term.writeln(`\r\nIniciando descarga de ${cvFileName}...`); const link = document.createElement('a'); link.href = cvFileName; link.download = cvFileName;  document.body.appendChild(link); link.click(); document.body.removeChild(link); setTimeout(() => { term.write('\r\nSi la descarga no comenzó, verifica que el archivo CV esté en la misma carpeta que index.html.'); }, 1500);  } else { term.writeln('\r\nUso: download cv'); } setTimeout(writePrompt, 1600); } },
+            'exit': { 
+                action: () => {
+                    term.writeln('\r\nCerrando terminal...'); 
+                    toggleTerminalVisibility(true); 
                 }
+            }
+        };
 
-                const printable = !domEvent.altKey && !domEvent.ctrlKey && !domEvent.metaKey;
+        let currentLine = '';
+        let dynamicPrompt = `\r\n\x1b[1;32mvisitor@Brayan_Garcia-portfolio\x1b[0m:\x1b[1;34m${formatPath(currentPath)}$\x1b[0m `;
+        
+        function updatePromptText() {
+            dynamicPrompt = `\r\n\x1b[1;32mvisitor@Brayan_Garcia-portfolio\x1b[0m:\x1b[1;34m${formatPath(currentPath)}$\x1b[0m `;
+        }
 
-                if (domEvent.keyCode === 13) { // Enter
-                    const trimmedLine = currentLine.trim(); 
-                    const [commandName, ...args] = trimmedLine.split(/\s+/).filter(s => s.length > 0);
-                    currentLine = ''; 
-
-                    if (commandName) {
-                        const commandExecutor = comandos[commandName.toLowerCase()];
-                        if (commandExecutor) {
-                            if (commandExecutor.output && commandName.toLowerCase() !== 'exit' && !(commandExecutor.action && ['all', 'clear', 'ls', 'cd', 'cat', 'download'].includes(commandName.toLowerCase()) )) { 
-                                 term.writeln(commandExecutor.output);
-                            } else if (commandExecutor.output && commandExecutor.action && commandName.toLowerCase() !== 'exit' && !['all', 'clear', 'ls', 'cd', 'cat', 'download'].includes(commandName.toLowerCase())) {
-                                 term.writeln(commandExecutor.output); 
-                            }
-
-                            if (commandExecutor.action) { 
-                                commandExecutor.action(args); 
-                            } else if (commandExecutor.output) { 
-                                if(commandExecutor.unlocks) {
-                                    const unlocked = unlockSection(commandExecutor.unlocks);
-                                    if (!unlocked && document.getElementById(commandExecutor.unlocks) && 
-                                        !document.getElementById(commandExecutor.unlocks).classList.contains('hidden-section')) {
-                                        term.writeln(`\n\rLa sección '\x1b[1;34m${commandExecutor.unlocks}\x1b[0m' ya estaba visible.`);
-                                    }
-                                }
-                                const footer = document.getElementById('footer'); 
-                                if (footer && footer.classList.contains('hidden-section')) {
-                                    const allMainSectionsUnlocked = ['sobre-mi', 'habilidades', 'proyectos', 'contacto'].every(id => {
-                                        const el = document.getElementById(id);
-                                        return el && !el.classList.contains('hidden-section');
-                                    });
-                                    if (allMainSectionsUnlocked) {
-                                        unlockSection('footer');
-                                    }
-                                }
-                                writePrompt(); 
-                            }
-                        } else {
-                            term.writeln(`\r\n\x1b[1;31mError:\x1b[0m Comando no reconocido: '${commandName}'.\n\rEscribe '\x1b[1;34mhelp\x1b[0m' para ver la lista de comandos válidos.`);
-                            writePrompt();
-                        }
-                    } else { 
-                        writePrompt(); 
+        function writePrompt() {
+            if (terminalSection && !terminalSection.classList.contains('terminal-collapsed')) {
+                currentLine = ''; 
+                term.write(dynamicPrompt);
+                setTimeout(() => {
+                    if (term && term.textarea && terminalSection && !terminalSection.classList.contains('terminal-collapsed')) {
+                        term.focus(); 
+                        term.scrollToBottom(); 
                     }
-                } else if (domEvent.keyCode === 8) { 
-                    if (currentLine.length > 0) { term.write('\b \b'); currentLine = currentLine.slice(0, -1); }
-                } else if (printable && key.length === 1) { term.write(key); currentLine += key; }
-            });
-        } // Fin de la condición 'else' para escritorio
+                }, 0);
+            }
+        }
+        
+        term.writeln('\x1b[1;32mBienvenido al Portafolio Interactivo de Brayan Garcia.\x1b[0m');
+        term.writeln('Sistema iniciado. Esperando comandos...');
+        term.writeln('Puedes ocultar/mostrar esta terminal con la tecla \x1b[1;33mEsc\x1b[0m, el botón, o el comando \x1b[1;33mexit\x1b[0m.');
+        writePrompt();
+
+        term.onKey(({ key, domEvent }) => {
+            if (terminalSection && terminalSection.classList.contains('terminal-collapsed')) {
+                return; 
+            }
+
+            const printable = !domEvent.altKey && !domEvent.ctrlKey && !domEvent.metaKey;
+
+            if (domEvent.keyCode === 13) { // Enter
+                const trimmedLine = currentLine.trim(); 
+                const [commandName, ...args] = trimmedLine.split(/\s+/).filter(s => s.length > 0);
+                currentLine = ''; 
+
+                if (commandName) {
+                    const commandExecutor = comandos[commandName.toLowerCase()];
+                    if (commandExecutor) {
+                        if (commandExecutor.output && commandName.toLowerCase() !== 'exit' && !(commandExecutor.action && ['all', 'clear', 'ls', 'cd', 'cat', 'download'].includes(commandName.toLowerCase()) )) { 
+                             term.writeln(commandExecutor.output);
+                        } else if (commandExecutor.output && commandExecutor.action && commandName.toLowerCase() !== 'exit' && !['all', 'clear', 'ls', 'cd', 'cat', 'download'].includes(commandName.toLowerCase())) {
+                             term.writeln(commandExecutor.output); 
+                        }
+
+                        if (commandExecutor.action) { 
+                            commandExecutor.action(args); 
+                        } else if (commandExecutor.output) { 
+                            if(commandExecutor.unlocks) {
+                                const unlocked = unlockSection(commandExecutor.unlocks);
+                                if (!unlocked && document.getElementById(commandExecutor.unlocks) && 
+                                    !document.getElementById(commandExecutor.unlocks).classList.contains('hidden-section')) {
+                                    term.writeln(`\n\rLa sección '\x1b[1;34m${commandExecutor.unlocks}\x1b[0m' ya estaba visible.`);
+                                }
+                            }
+                            const footer = document.getElementById('footer'); 
+                            if (footer && footer.classList.contains('hidden-section')) {
+                                const allMainSectionsUnlocked = ['sobre-mi', 'habilidades', 'proyectos', 'contacto'].every(id => {
+                                    const el = document.getElementById(id);
+                                    return el && !el.classList.contains('hidden-section');
+                                });
+                                if (allMainSectionsUnlocked) {
+                                    unlockSection('footer');
+                                }
+                            }
+                            writePrompt(); 
+                        }
+                    } else {
+                        term.writeln(`\r\n\x1b[1;31mError:\x1b[0m Comando no reconocido: '${commandName}'.\n\rEscribe '\x1b[1;34mhelp\x1b[0m' para ver la lista de comandos válidos.`);
+                        writePrompt();
+                    }
+                } else { 
+                    writePrompt(); 
+                }
+            } else if (domEvent.keyCode === 8) { 
+                if (currentLine.length > 0) { term.write('\b \b'); currentLine = currentLine.slice(0, -1); }
+            } else if (printable && key.length === 1) { term.write(key); currentLine += key; }
+        });
     });
     </script>
 </body>
