@@ -292,11 +292,11 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Configuración de Particles.js con tema de Ciberseguridad
+        // Configuración de Particles.js con tema de Ciberseguridad (Optimizado)
         particlesJS('particles-js', {
             "particles": {
                 "number": {
-                    "value": 100,
+                    "value": 60, // Reducido de 100 a 60
                     "density": {
                         "enable": true,
                         "value_area": 800
@@ -319,10 +319,7 @@
                     "value": 0.4,
                     "random": true,
                     "anim": {
-                        "enable": true,
-                        "speed": 0.5,
-                        "opacity_min": 0.1,
-                        "sync": false
+                        "enable": false // Deshabilitada animación de opacidad
                     }
                 },
                 "size": {
@@ -334,14 +331,14 @@
                 },
                 "line_linked": {
                     "enable": true,
-                    "distance": 120,
+                    "distance": 150, // Ligeramente aumentado para compensar menos partículas
                     "color": "#8892b0",
-                    "opacity": 0.3,
+                    "opacity": 0.2,
                     "width": 1
                 },
                 "move": {
                     "enable": true,
-                    "speed": 5,
+                    "speed": 4, // Ligeramente reducido
                     "direction": "none",
                     "random": true,
                     "straight": false,
@@ -357,7 +354,7 @@
                 "events": {
                     "onhover": {
                         "enable": true,
-                        "mode": "grab"
+                        "mode": "repulse" // Cambiado de 'grab' a 'repulse' (más ligero)
                     },
                     "onclick": {
                         "enable": true,
@@ -366,14 +363,9 @@
                     "resize": true
                 },
                 "modes": {
-                    "grab": {
-                        "distance": 140,
-                        "line_linked": {
-                            "opacity": 0.7
-                        }
-                    },
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.7 } },
                     "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
-                    "repulse": { "distance": 200, "duration": 0.4 },
+                    "repulse": { "distance": 100, "duration": 0.4 }, // Ajustado para ser sutil
                     "push": { "particles_nb": 4 },
                     "remove": { "particles_nb": 2 }
                 }
@@ -494,7 +486,7 @@
                 const userHost = `${currentState.user}@portfolio`;
                 const pathSymbol = `:${displayPath}$`;
                 terminalTitle.textContent = `${userHost}: ${displayPath}`;
-                terminalPrompt.innerHTML = `<span class="text-slate-500">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
+                terminalPrompt.innerHTML = `<span class="text-slate-600">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
             };
 
             const printToTerminal = (text, asCommand = false) => {
@@ -667,4 +659,7 @@
 </body>
 
 </html>
+
+
+
 
