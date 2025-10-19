@@ -244,7 +244,7 @@
                     <span class="flex-grow h-px bg-slate-700 ml-4"></span>
                 </h2>
                 <div id="terminal" class="w-full max-w-4xl mx-auto h-[400px] sm:h-[500px] glass-effect ciber-card rounded-lg shadow-lg overflow-hidden flex flex-col font-mono text-sm" onclick="document.getElementById('terminal-input').focus()">
-                    <div class="bg-gray-900 p-2 flex items-center flex-shrink-0">
+                    <div class="bg-slate-800/50 p-2 flex items-center flex-shrink-0">
                         <div class="flex space-x-2">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -254,7 +254,7 @@
                     </div>
                     <div id="terminal-body" class="flex-grow p-4 overflow-y-auto text-slate-300">
                         <!-- Output will be appended here --></div>
-                    <div class="bg-slate-900/50 p-2 flex items-center flex-shrink-0">
+                    <div class="bg-gray-900 p-2 flex items-center flex-shrink-0">
                         <span class="text-[#64ffda]">brian@portfolio:~$</span>
                         <input type="text" id="terminal-input" class="bg-transparent border-none text-slate-300 w-full ml-2 focus:outline-none">
                     </div>
@@ -491,7 +491,7 @@
                 const userHost = `${currentState.user}@portfolio`;
                 const pathSymbol = `:${displayPath}$`;
                 terminalTitle.textContent = `${userHost}: ${displayPath}`;
-                terminalPrompt.innerHTML = `<span class="text-slate-500">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
+                terminalPrompt.innerHTML = `<span class="text-slate-700">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
             };
 
             const printToTerminal = (text, asCommand = false) => {
@@ -664,4 +664,5 @@
 </body>
 
 </html>
+
 
