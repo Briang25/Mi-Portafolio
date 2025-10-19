@@ -441,48 +441,160 @@
                 }
             });
             
-            // LÓGICA DE LA TERMINAL CTF
+            
+            // LÓGICA DE LA TERMINAL CTF 
             const terminalBody = document.getElementById('terminal-body');
             const terminalInput = document.getElementById('terminal-input');
+            const terminalTitle = document.getElementById('terminal-title');
+            const terminalPrompt = document.getElementById('terminal-prompt');
+
+            const fileSystem = {
+                type: 'dir',
+                content: {
+                    'README.txt': { type: 'file', content: 'Bienvenido a mi terminal. Tu objetivo es encontrar la flag. Usa `help` para empezar.' },
+                    'documents': { 
+                        type: 'dir', 
+                        content: {
+                            'notes.txt': { type: 'file', content: 'Un directorio de documentos. Nada interesante por aquí.' }
+                        } 
+                    },
+                    '.secret': {
+                        type: 'dir',
+                        content: {
+                            'clue.txt': { type: 'file', content: 'La clave está en la base. A veces, para ver claro, hay que decodificar.<br><span class="text-yellow-400 selectable-text">Li9kb3dubG9hZF9jdg==</span>' }
+                        }
+                    }
+                }
+            };
+            
+            let currentState = {
+                cwd: [],
+                user: 'brian',
+                history: [],
+                historyIndex: -1
+            };
+
+            const getPathObject = (pathArray) => {
+                let current = fileSystem;
+                for (const part of pathArray) {
+                    if (current && current.type === 'dir' && current.content[part]) {
+                        current = current.content[part];
+                    } else {
+                        return null;
+                    }
+                }
+                return current;
+            };
+
+            const updatePrompt = () => {
+                const displayPath = `~/${currentState.cwd.join('/')}`;
+                const userHost = `${currentState.user}@portfolio`;
+                const pathSymbol = `:${displayPath}$`;
+                terminalTitle.textContent = `${userHost}: ${displayPath}`;
+                terminalPrompt.innerHTML = `<span class="text-slate-500">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
+            };
 
             const printToTerminal = (text, asCommand = false) => {
-                const prompt = `<span class="text-[#64ffda]">brian@portfolio:~$</span>`;
+                const promptHTML = terminalPrompt.innerHTML;
                 const line = document.createElement('div');
                 if (asCommand) {
-                    line.innerHTML = `${prompt} <span class="text-slate-300">${text}</span>`;
+                    line.innerHTML = `${promptHTML} <span class="text-slate-300">${text}</span>`;
                 } else {
-                    line.innerHTML = text.split('\n').join('<br>');
+                    line.innerHTML = text.split('\n').map(l => `<div>${l}</div>`).join('');
                 }
                 terminalBody.appendChild(line);
                 terminalBody.scrollTop = terminalBody.scrollHeight;
             };
-
+            
             const executeCommand = (cmd) => {
+                if (cmd.trim()) {
+                    currentState.history.push(cmd);
+                }
+                currentState.historyIndex = currentState.history.length;
+
                 printToTerminal(cmd, true);
 
-                switch (cmd.toLowerCase().trim()) {
+                if (cmd.trim() === './download_cv') {
+                    if (currentState.cwd.join('/') === '.secret') {
+                         printToTerminal(`<span class="text-green-400">[FLAG CAPTURADA]</span> ¡Bien hecho! Iniciando descarga del CV...`);
+                         document.getElementById('cv-download-link').click();
+                    } else {
+                        printToTerminal(`bash: ./download_cv: No se puede ejecutar. Pista: debes estar en el directorio correcto.`);
+                    }
+                    terminalInput.value = '';
+                    return;
+                }
+
+                const [command, ...args] = cmd.trim().split(/\s+/);
+
+                switch (command.toLowerCase()) {
                     case 'help':
                         printToTerminal(
                             `Comandos disponibles:\n` +
-                            `  <span class="text-[#64ffda]">help</span>          - Muestra esta lista de comandos.\n` +
-                            `  <span class="text-[#64ffda]">ls</span>            - Lista los archivos en el directorio.\n` +
-                            `  <span class="text-[#64ffda]">cat [archivo]</span>   - Muestra el contenido de un archivo.\n` +
-                            `  <span class="text-[#64ffda]">clear</span>         - Limpia la terminal.\n` +
-                            `  <span class="text-[#64ffda]">descargar-cv</span>  - ???`
+                            `  <span class="text-[#64ffda]">help</span>            - Muestra esta lista de comandos.\n` +
+                            `  <span class="text-[#64ffda]">ls [-a]</span>         - Lista archivos y directorios.\n` +
+                            `  <span class="text-[#64ffda]">cd [directorio]</span> - Cambia de directorio.\n` +
+                            `  <span class="text-[#64ffda]">cat [archivo]</span>     - Muestra el contenido de un archivo.\n` +
+                            `  <span class="text-[#64ffda]">pwd</span>             - Muestra el directorio actual.\n` +
+                            `  <span class="text-[#64ffda]">whoami</span>          - Muestra el usuario actual.\n` +
+                            `  <span class="text-[#64ffda]">clear</span>           - Limpia la terminal.`
                         );
                         break;
                     
                     case 'ls':
-                        printToTerminal(`<span class="text-blue-400">objetivo.txt</span>`);
+                        const currentDir = getPathObject(currentState.cwd);
+                        if (currentDir && currentDir.type === 'dir') {
+                            let output = Object.keys(currentDir.content).filter(name => {
+                                return args.includes('-a') || !name.startsWith('.');
+                            }).map(name => {
+                                const item = currentDir.content[name];
+                                if (item.type === 'dir') return `<span class="text-blue-400">${name}/</span>`;
+                                return name;
+                            }).join('  ');
+                            printToTerminal(output || '');
+                        }
                         break;
 
-                    case 'cat objetivo.txt':
-                        printToTerminal(`El objetivo es claro: La bandera es la prueba de mis habilidades. Ejecuta el comando para descargarla.`);
+                    case 'cd':
+                        const targetDir = args[0] || '';
+                        if (targetDir === '' || targetDir === '~') {
+                            currentState.cwd = [];
+                        } else if (targetDir === '..') {
+                            if (currentState.cwd.length > 0) {
+                                currentState.cwd.pop();
+                            }
+                        } else {
+                            const currentPath = [...currentState.cwd, targetDir];
+                            const dirObj = getPathObject(currentPath);
+                            if (dirObj && dirObj.type === 'dir') {
+                                currentState.cwd = currentPath;
+                            } else {
+                                printToTerminal(`bash: cd: ${args[0]}: No es un directorio o no existe`);
+                            }
+                        }
+                        updatePrompt();
+                        break;
+
+                    case 'cat':
+                        const targetFile = args[0];
+                        if (!targetFile) {
+                            printToTerminal('cat: Falta un operando');
+                            break;
+                        }
+                        const fileDir = getPathObject(currentState.cwd);
+                        if (fileDir && fileDir.content[targetFile] && fileDir.content[targetFile].type === 'file') {
+                            printToTerminal(fileDir.content[targetFile].content.replace(/\n/g, '<br>'));
+                        } else {
+                            printToTerminal(`cat: ${targetFile}: No existe el archivo o es un directorio`);
+                        }
                         break;
                     
-                    case 'descargar-cv':
-                        printToTerminal(`<span class="text-green-400">[FLAG CAPTURADA]</span> Iniciando descarga del CV...`);
-                        document.getElementById('cv-download-link').click();
+                    case 'pwd':
+                        printToTerminal(`/home/brian/${currentState.cwd.join('/')}`);
+                        break;
+
+                    case 'whoami':
+                        printToTerminal(currentState.user);
                         break;
 
                     case 'clear':
@@ -494,11 +606,25 @@
                         break;
 
                     default:
-                        printToTerminal(`bash: comando no encontrado: ${cmd}`);
+                        printToTerminal(`bash: comando no encontrado: ${command}`);
                         break;
                 }
 
                 terminalInput.value = '';
+            };
+            
+            const handleAutocomplete = () => {
+                const currentDir = getPathObject(currentState.cwd);
+                const currentInput = terminalInput.value.split(' ').pop();
+                if (!currentDir || !currentInput) return;
+                
+                const possibleMatches = Object.keys(currentDir.content).filter(name => name.startsWith(currentInput));
+
+                if (possibleMatches.length === 1) {
+                    const parts = terminalInput.value.split(' ');
+                    parts[parts.length - 1] = possibleMatches[0];
+                    terminalInput.value = parts.join(' ');
+                }
             };
 
             const printWelcomeMessage = () => {
@@ -510,18 +636,31 @@
             terminalInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     executeCommand(terminalInput.value);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (currentState.historyIndex > 0) {
+                        currentState.historyIndex--;
+                        terminalInput.value = currentState.history[currentState.historyIndex];
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (currentState.historyIndex < currentState.history.length - 1) {
+                        currentState.historyIndex++;
+                        terminalInput.value = currentState.history[currentState.historyIndex];
+                    } else {
+                        currentState.historyIndex = currentState.history.length;
+                        terminalInput.value = '';
+                    }
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    handleAutocomplete();
                 }
             });
 
             printWelcomeMessage();
+            updatePrompt();
         });
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
