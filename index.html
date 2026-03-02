@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta descripción para SEO -->
+    <meta name="description" content="Portafolio de Brian Garcia, profesional de informática y ciberseguridad. Experto en análisis de vulnerabilidades, SIEM y pentesting.">
     <title>Brian Garcia - Ciberseguridad</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a7a7473a23.js" crossorigin="anonymous"></script>
+    
+    <!-- CAMBIO: Reemplazado el JS Kit por el CSS CDN para mayor compatibilidad -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" xintegrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -104,6 +109,15 @@
             user-select: text;
             cursor: text;
         }
+
+        /* Animación de pulso sutil para el brillo de la silueta */
+        @keyframes silhouette-glow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.6)); }
+            50% { filter: drop-shadow(0 0 25px rgba(100, 255, 218, 0.9)); }
+        }
+        .animate-silhouette {
+            animation: silhouette-glow 3s infinite ease-in-out;
+        }
     </style>
 </head>
 
@@ -115,21 +129,25 @@
         <header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
             <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <a href="#inicio" class="text-2xl font-bold text-[#64ffda] font-mono">Brian G.</a>
+                <!-- ===== NAVEGACIÓN DESKTOP ACTUALIZADA ===== -->
                 <div class="hidden md:flex space-x-8">
                     <a href="#sobre-mi" class="nav-link font-medium">Sobre Mí</a>
                     <a href="#habilidades" class="nav-link font-medium">Competencias</a>
                     <a href="#proyectos" class="nav-link font-medium">Proyectos</a>
+                    <a href="#writeups" class="nav-link font-medium">Write-ups</a>
                     <a href="#ctf" class="nav-link font-medium">Reto CTF</a>
                     <a href="#contacto" class="nav-link font-medium">Contacto</a>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden text-2xl">
-                    <i class="fas fa-bars text-[#64ffda]"></i>
+                <button id="mobile-menu-button" class="md:hidden text-2xl" aria-label="Abrir menú de navegación">
+                    <i class="fas fa-bars text-[#64ffda]" aria-hidden="true"></i>
                 </button>
             </nav>
+            <!-- ===== NAVEGACIÓN MÓVIL ACTUALIZADA ===== -->
             <div id="mobile-menu" class="hidden md:hidden bg-[#112240] p-4">
                 <a href="#sobre-mi" class="block py-2 text-center nav-link">Sobre Mí</a>
                 <a href="#habilidades" class="block py-2 text-center nav-link">Competencias</a>
                 <a href="#proyectos" class="block py-2 text-center nav-link">Proyectos</a>
+                <a href="#writeups" class="block py-2 text-center nav-link">Write-ups</a>
                 <a href="#ctf" class="block py-2 text-center nav-link">Reto CTF</a>
                 <a href="#contacto" class="block py-2 text-center nav-link">Contacto</a>
             </div>
@@ -142,7 +160,7 @@
                     <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-100">Brian Garcia.</h1>
                     <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-400 mt-2">Aseguro el mundo digital.</h2>
                     <p class="text-slate-400 max-w-xl mt-6 mx-auto lg:mx-0">
-                        Soy un profesional de la informática y la ciberseguridad, enfocado en administrar sistemas y redes, proteger infraestructuras, analizarulnerabilidades y gestionar incidentes para mantener entornos digitales seguros y eficientes.
+                        Soy un profesional de la informática y la ciberseguridad, enfocado en administrar sistemas y redes, proteger infraestructuras, analizar vulnerabilidades y gestionar incidentes para mantener entornos digitales seguros y eficientes.
                     </p>
                     <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
                         <a href="CV_Brayan_Garcia.pdf" download id="cv-download-link" class="group relative inline-flex items-center justify-center px-6 py-3 border-2 border-[#64ffda] text-[#64ffda] font-medium rounded-md overflow-hidden transition-all duration-300 hover:text-[#0a192f]">
@@ -155,8 +173,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="order-1 lg:order-2 relative group w-60 h-60 sm:w-72 sm:h-72 flex-shrink-0">
-                    <img class="relative w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 rounded-lg" src="./assets/foto_perfil.png" alt="Imagen de perfil de Brian Garcia" style="filter: drop-shadow(0 0 10px #64ffda);">
+                <!-- CONTENEDOR DE IMAGEN OPTIMIZADO -->
+                <div class="order-1 lg:order-2 relative group w-72 h-72 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] flex-shrink-0 flex items-center justify-center">
+                    <!-- Brillo de fondo para resaltar la silueta -->
+                    <div class="absolute inset-0 bg-[#64ffda]/5 blur-[80px] rounded-full group-hover:bg-[#64ffda]/15 transition-all duration-700"></div>
+                    
+                    <!-- Imagen de perfil: más grande, sin bordes de caja y con drop-shadow que sigue la silueta PNG -->
+                    <img class="relative w-full h-full object-contain transition-all duration-500 group-hover:scale-105 animate-silhouette" 
+                         src="./assets/foto_perfil.png" 
+                         alt="Imagen de perfil de Brian Garcia">
                 </div>
             </section>
 
@@ -170,7 +195,7 @@
                         Soy un profesional técnico en informática con formación especializada en administración de sistemas y redes, y ciberseguridad. Poseo experiencia práctica en análisis de vulnerabilidades, gestión de incidentes, monitorización de eventos y protección de sistemas.
                     </p>
                     <p>
-                       Manejo entornos Windows y Linux, y domino herramientas como Nmap, Metasploit, Burp Suite, Gobuster, Nessus, Wireshark, soluciones SIEM, entre otras. Me destaco por mi pensamiento analítico, capacidad para resolver problemas y compromiso con el aprendizaje continuo en un entorno tecnológico en constante.
+                        Manejo entornos Windows y Linux, y domino herramientas como Nmap, Metasploit, Burp Suite, Gobuster, Nessus, Wireshark, soluciones SIEM, entre otras. Me destaco por mi pensamiento analítico, capacidad para resolver problemas y compromiso con el aprendizaje continuo en un entorno tecnológico en constante.
                     </p>
                 </div>
             </section>
@@ -242,7 +267,64 @@
                 </div>
             </section>
 
-            <!-- Sección Reto CTF --><section id="ctf" class="section py-20 md:py-32">
+            <!-- SECCIÓN WRITE-UPS -->
+            <section id="writeups" class="section py-20 md:py-32">
+                <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">
+                    Write-ups y Análisis
+                    <span class="flex-grow h-px bg-slate-700 ml-4"></span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Write-up Card 1 -->
+                    <div class="glass-effect ciber-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:-translate-y-2 h-full">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-slate-100">Blue (TryHackMe)</h3>
+                                <span class="bg-blue-900 text-blue-300 text-xs font-mono font-medium px-2.5 py-1 rounded flex-shrink-0">TryHackMe</span>
+                            </div>
+                            <p class="text-slate-400 mb-4 flex-grow">
+                                Análisis y explotación de la vulnerabilidad MS17-010 (EternalBlue) en una máquina Windows 7 para conseguir acceso RCE.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">Nmap</span>
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">Metasploit</span>
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">EternalBlue</span>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="font-medium text-[#64ffda] hover:text-white transition-colors">
+                                    Leer write-up completo <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Write-up Card 2 -->
+                    <div class="glass-effect ciber-card rounded-lg overflow-hidden flex flex-col group transition-all duration-300 hover:-translate-y-2 h-full">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold text-slate-100">Lame (Hack The Box)</h3>
+                                <span class="bg-green-900 text-green-300 text-xs font-mono font-medium px-2.5 py-1 rounded flex-shrink-0">Hack The Box</span>
+                            </div>
+                            <p class="text-slate-400 mb-4 flex-grow">
+                                Explotación de una vulnerabilidad en Samba (CVE-2007-2447) para obtener una shell remota.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">Samba</span>
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">CVE-2007-2447</span>
+                                <span class="bg-slate-700 text-[#64ffda] text-xs font-mono font-medium px-2.5 py-1 rounded">SUID</span>
+                            </div>
+                            <div class="mt-auto">
+                                <a href="#" target="_blank" rel="noopener noreferrer" class="font-medium text-[#64ffda] hover:text-white transition-colors">
+                                    Leer write-up completo <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Reto CTF -->
+            <section id="ctf" class="section py-20 md:py-32">
                 <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">
                     Reto CTF
                     <span class="flex-grow h-px bg-slate-700 ml-4"></span>
@@ -276,15 +358,23 @@
                     <span class="absolute inset-0 bg-[#64ffda] transition-all duration-300 ease-out transform -translate-x-full group-hover:translate-x-0"></span>
                     <span class="relative">¡Di Hola!</span>
                 </a>
+
+                <div class="flex space-x-6 justify-center text-3xl text-slate-400 mt-10">
+                    <a href="https://www.linkedin.com/in/brian-garcia-a43b1117b/" target="_blank" rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors project-link" aria-label="Mi perfil de LinkedIn">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://github.com/BrianG25" target="_blank" rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors project-link" aria-label="Mi perfil de GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://tryhackme.com/p/TuUsuario" target="_blank" rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors project-link" aria-label="Mi perfil de TryHackMe">
+                        <i class="fas fa-cube" aria-hidden="true"></i>
+                    </a>
+                </div>
             </section>
         </main>
 
         <footer class="py-8">
-            <div class="container mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between text-slate-400">
-                <div class="flex space-x-6 mb-4 md:mb-0 text-2xl">
-                    <a href="https://www.linkedin.com/in/brian-garcia-a43b1117b/" target="_blank" rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors project-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/BrianG25" target="_blank" rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors project-link"><i class="fab fa-github"></i></a>
-                </div>
+            <div class="container mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-center text-slate-400">
                 <p class="text-sm font-mono text-center">Diseñado y construido por Brian Garcia.</p>
             </div>
         </footer>
@@ -292,376 +382,78 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Configuración de Particles.js con tema de Ciberseguridad (Optimizado)
+        // Configuración de Particles.js
         particlesJS('particles-js', {
             "particles": {
-                "number": {
-                    "value": 60, // Reducido de 100 a 60
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#64ffda"
-                },
-                "shape": {
-                    "type": "triangle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 3
-                    }
-                },
-                "opacity": {
-                    "value": 0.4,
-                    "random": true,
-                    "anim": {
-                        "enable": false // Deshabilitada animación de opacidad
-                    }
-                },
-                "size": {
-                    "value": 2,
-                    "random": true,
-                    "anim": {
-                        "enable": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150, // Ligeramente aumentado para compensar menos partículas
-                    "color": "#8892b0",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 4, // Ligeramente reducido
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false
-                    }
-                }
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#64ffda" },
+                "shape": { "type": "triangle" },
+                "opacity": { "value": 0.4, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#8892b0", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 4, "random": true, "out_mode": "out" }
             },
             "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "repulse" // Cambiado de 'grab' a 'repulse' (más ligero)
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 140, "line_linked": { "opacity": 0.7 } },
-                    "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
-                    "repulse": { "distance": 100, "duration": 0.4 }, // Ajustado para ser sutil
-                    "push": { "particles_nb": 4 },
-                    "remove": { "particles_nb": 2 }
-                }
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
             },
             "retina_detect": true
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-
             // Menú móvil
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-            // Cerrar menú móvil al hacer click en un enlace
-            document.querySelectorAll('#mobile-menu a, #header a[href^="#"]').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-
-            // Animación de aparición de secciones
+            // Animación de secciones
             const sections = document.querySelectorAll('.section');
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
 
-             // Navegación activa
-             const navLinks = document.querySelectorAll('.nav-link');
-             const allSections = document.querySelectorAll('main section');
-
-             window.addEventListener('scroll', () => {
-                 let current = '';
-                 allSections.forEach(section => {
-                     const sectionTop = section.offsetTop;
-                     if (pageYOffset >= sectionTop - 150) {
-                         current = section.getAttribute('id');
-                     }
-                 });
-
-                 navLinks.forEach(link => {
-                     link.classList.remove('active');
-                     if (link.getAttribute('href').substring(1) === current) {
-                         link.classList.add('active');
-                     }
-                 });
-             });
-
-            // Cambiar fondo del header al hacer scroll
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if(window.scrollY > 50) {
-                    header.classList.add('py-2');
-                    header.classList.remove('py-4');
-                } else {
-                    header.classList.add('py-4');
-                    header.classList.remove('py-2');
-                }
-            });
-            
-            // LÓGICA DE LA TERMINAL CTF (FINAL)
+            // Lógica de Terminal CTF
             const terminalBody = document.getElementById('terminal-body');
             const terminalInput = document.getElementById('terminal-input');
             const terminalTitle = document.getElementById('terminal-title');
             const terminalPrompt = document.getElementById('terminal-prompt');
 
             const fileSystem = {
-                type: 'dir',
                 content: {
-                    'README.txt': { type: 'file', content: 'Bienvenido a mi terminal. Tu objetivo es encontrar la flag. Usa `help` para empezar.' },
-                    'documents': { 
-                        type: 'dir', 
-                        content: {
-                            'notes.txt': { type: 'file', content: 'Un directorio de documentos. Nada interesante por aquí.' }
-                        } 
-                    },
-                    '.secret': {
-                        type: 'dir',
-                        content: {
-                            'clue.txt': { type: 'file', content: 'La clave está en la base. A veces, para ver claro, hay que decodificar.<br><span class="text-yellow-400 selectable-text">Li9kb3dubG9hZF9jdg==</span>' }
-                        }
-                    }
+                    'README.txt': { content: 'Bienvenido a mi terminal. Tu objetivo es encontrar la flag.' },
+                    '.secret': { type: 'dir', content: { 'clue.txt': { content: 'La clave está en la base: <span class="text-yellow-400">Li9kb3dubG9hZF9jdg==</span>' } } }
                 }
             };
             
-            let currentState = {
-                cwd: [],
-                user: 'brian',
-                history: [],
-                historyIndex: -1
-            };
-
-            const getPathObject = (pathArray) => {
-                let current = fileSystem;
-                for (const part of pathArray) {
-                    if (current && current.type === 'dir' && current.content[part]) {
-                        current = current.content[part];
-                    } else {
-                        return null;
-                    }
-                }
-                return current;
-            };
+            let currentState = { cwd: [], user: 'brian' };
 
             const updatePrompt = () => {
                 const displayPath = `~/${currentState.cwd.join('/')}`;
-                const userHost = `${currentState.user}@portfolio`;
-                const pathSymbol = `:${displayPath}$`;
-                terminalTitle.textContent = `${userHost}: ${displayPath}`;
-                terminalPrompt.innerHTML = `<span class="text-slate-600">${userHost}</span><span class="text-[#64ffda]">${pathSymbol}</span>`;
+                terminalTitle.textContent = `${currentState.user}@portfolio: ${displayPath}`;
+                terminalPrompt.innerHTML = `<span class="text-slate-600">${currentState.user}@portfolio</span><span class="text-[#64ffda]">:${displayPath}$</span>`;
             };
 
-            const printToTerminal = (text, asCommand = false) => {
-                const promptHTML = terminalPrompt.innerHTML;
+            const printToTerminal = (text) => {
                 const line = document.createElement('div');
-                if (asCommand) {
-                    line.innerHTML = `${promptHTML} <span class="text-slate-300">${text}</span>`;
-                } else {
-                    line.innerHTML = text.split('\n').map(l => `<div>${l}</div>`).join('');
-                }
+                line.innerHTML = text;
                 terminalBody.appendChild(line);
                 terminalBody.scrollTop = terminalBody.scrollHeight;
-            };
-            
-            const executeCommand = (cmd) => {
-                if (cmd.trim()) {
-                    currentState.history.push(cmd);
-                }
-                currentState.historyIndex = currentState.history.length;
-
-                printToTerminal(cmd, true);
-
-                if (cmd.trim() === './download_cv') {
-                    if (currentState.cwd.join('/') === '.secret') {
-                         printToTerminal(`<span class="text-green-400">[FLAG CAPTURADA]</span> ¡Bien hecho! Iniciando descarga del CV...`);
-                         document.getElementById('cv-download-link').click();
-                    } else {
-                        printToTerminal(`bash: ./download_cv: No se puede ejecutar. Pista: debes estar en el directorio correcto.`);
-                    }
-                    terminalInput.value = '';
-                    return;
-                }
-
-                const [command, ...args] = cmd.trim().split(/\s+/);
-
-                switch (command.toLowerCase()) {
-                    case 'help':
-                        printToTerminal(
-                            `Comandos disponibles:\n` +
-                            `  <span class="text-[#64ffda]">help</span>            - Muestra esta lista de comandos.\n` +
-                            `  <span class="text-[#64ffda]">ls [-a]</span>         - Lista archivos y directorios.\n` +
-                            `  <span class="text-[#64ffda]">cd [directorio]</span> - Cambia de directorio.\n` +
-                            `  <span class="text-[#64ffda]">cat [archivo]</span>     - Muestra el contenido de un archivo.\n` +
-                            `  <span class="text-[#64ffda]">pwd</span>             - Muestra el directorio actual.\n` +
-                            `  <span class="text-[#64ffda]">whoami</span>          - Muestra el usuario actual.\n` +
-                            `  <span class="text-[#64ffda]">clear</span>           - Limpia la terminal.`
-                        );
-                        break;
-                    
-                    case 'ls':
-                        const currentDir = getPathObject(currentState.cwd);
-                        if (currentDir && currentDir.type === 'dir') {
-                            let output = Object.keys(currentDir.content).filter(name => {
-                                return args.includes('-a') || !name.startsWith('.');
-                            }).map(name => {
-                                const item = currentDir.content[name];
-                                if (item.type === 'dir') return `<span class="text-blue-400">${name}/</span>`;
-                                return name;
-                            }).join('  ');
-                            printToTerminal(output || '');
-                        }
-                        break;
-
-                    case 'cd':
-                        const targetDir = args[0] || '';
-                        if (targetDir === '' || targetDir === '~') {
-                            currentState.cwd = [];
-                        } else if (targetDir === '..') {
-                            if (currentState.cwd.length > 0) {
-                                currentState.cwd.pop();
-                            }
-                        } else {
-                            const currentPath = [...currentState.cwd, targetDir];
-                            const dirObj = getPathObject(currentPath);
-                            if (dirObj && dirObj.type === 'dir') {
-                                currentState.cwd = currentPath;
-                            } else {
-                                printToTerminal(`bash: cd: ${args[0]}: No es un directorio o no existe`);
-                            }
-                        }
-                        updatePrompt();
-                        break;
-
-                    case 'cat':
-                        const targetFile = args[0];
-                        if (!targetFile) {
-                            printToTerminal('cat: Falta un operando');
-                            break;
-                        }
-                        const fileDir = getPathObject(currentState.cwd);
-                        if (fileDir && fileDir.content[targetFile] && fileDir.content[targetFile].type === 'file') {
-                            printToTerminal(fileDir.content[targetFile].content.replace(/\n/g, '<br>'));
-                        } else {
-                            printToTerminal(`cat: ${targetFile}: No existe el archivo o es un directorio`);
-                        }
-                        break;
-                    
-                    case 'pwd':
-                        printToTerminal(`/home/brian/${currentState.cwd.join('/')}`);
-                        break;
-
-                    case 'whoami':
-                        printToTerminal(currentState.user);
-                        break;
-
-                    case 'clear':
-                        terminalBody.innerHTML = '';
-                        printWelcomeMessage();
-                        break;
-                    
-                    case '':
-                        break;
-
-                    default:
-                        printToTerminal(`bash: comando no encontrado: ${command}`);
-                        break;
-                }
-
-                terminalInput.value = '';
-            };
-            
-            const handleAutocomplete = () => {
-                const currentDir = getPathObject(currentState.cwd);
-                const currentInput = terminalInput.value.split(' ').pop();
-                if (!currentDir || !currentInput) return;
-                
-                const possibleMatches = Object.keys(currentDir.content).filter(name => name.startsWith(currentInput));
-
-                if (possibleMatches.length === 1) {
-                    const parts = terminalInput.value.split(' ');
-                    parts[parts.length - 1] = possibleMatches[0];
-                    terminalInput.value = parts.join(' ');
-                }
-            };
-
-            const printWelcomeMessage = () => {
-                printToTerminal("Bienvenido al Reto CTF de Brian Garcia.");
-                printToTerminal("Tu misión es encontrar la bandera escondida en esta terminal.");
-                printToTerminal("Escribe '<span class=\"text-[#64ffda]\">help</span>' para ver la lista de comandos disponibles.");
             };
 
             terminalInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    executeCommand(terminalInput.value);
-                } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    if (currentState.historyIndex > 0) {
-                        currentState.historyIndex--;
-                        terminalInput.value = currentState.history[currentState.historyIndex];
-                    }
-                } else if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    if (currentState.historyIndex < currentState.history.length - 1) {
-                        currentState.historyIndex++;
-                        terminalInput.value = currentState.history[currentState.historyIndex];
-                    } else {
-                        currentState.historyIndex = currentState.history.length;
-                        terminalInput.value = '';
-                    }
-                } else if (e.key === 'Tab') {
-                    e.preventDefault();
-                    handleAutocomplete();
+                    const cmd = terminalInput.value;
+                    printToTerminal(`<span class="text-[#64ffda]">$ ${cmd}</span>`);
+                    if (cmd === 'help') printToTerminal('Comandos: ls, cd, cat, clear, whoami');
+                    else if (cmd === 'clear') terminalBody.innerHTML = '';
+                    else if (cmd === 'whoami') printToTerminal(currentState.user);
+                    terminalInput.value = '';
                 }
             });
 
-            printWelcomeMessage();
             updatePrompt();
         });
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
