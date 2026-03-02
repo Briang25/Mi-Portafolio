@@ -97,12 +97,16 @@
             box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
         }
 
+        /* Animación de iluminación de la silueta */
         @keyframes silhouette-glow {
-            0%, 100% { filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.6)); }
-            50% { filter: drop-shadow(0 0 25px rgba(100, 255, 218, 0.9)); }
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.55)); }
+            50% { filter: drop-shadow(0 0 30px rgba(100, 255, 218, 0.85)); }
         }
         .animate-silhouette {
             animation: silhouette-glow 3s infinite ease-in-out;
+            /* Importante: para que no se vea el fondo cuadrado, la imagen no debe tener bordes o bg */
+            background: transparent !important;
+            border: none !important;
         }
 
         .view-hidden {
@@ -172,9 +176,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="order-1 lg:order-2 relative group w-72 h-72 sm:w-80 sm:h-80 lg:w-[450px] lg:h-[450px] flex-shrink-0 flex items-center justify-center">
-                    <div class="absolute inset-0 bg-[#64ffda]/5 blur-[80px] rounded-full group-hover:bg-[#64ffda]/15 transition-all duration-700"></div>
-                    <img class="relative w-full h-full object-contain transition-all duration-500 group-hover:scale-105 animate-silhouette" src="./assets/foto_perfil.png" alt="Brian Garcia">
+                <!-- CONTENEDOR DE IMAGEN OPTIMIZADO PARA SILUETA -->
+                <div class="order-1 lg:order-2 relative group w-72 h-72 sm:w-80 sm:h-80 lg:w-[500px] lg:h-[500px] flex-shrink-0 flex items-center justify-center">
+                    <!-- Brillo ambiental de fondo -->
+                    <div class="absolute inset-0 bg-[#64ffda]/10 blur-[100px] rounded-full group-hover:bg-[#64ffda]/20 transition-all duration-700"></div>
+                    
+                    <!-- Imagen de perfil: sin estilos de contenedor cuadrado y con drop-shadow -->
+                    <img class="relative w-full h-full object-contain transition-all duration-500 group-hover:scale-105 animate-silhouette" 
+                         src="./assets/foto_perfil.png" 
+                         alt="Brian Garcia">
                 </div>
             </section>
 
@@ -303,7 +313,6 @@
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Networking & ASIR</h3>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- ID Clase de IP -->
                         <div class="glass-effect rounded-lg p-6 space-y-4">
                             <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-network-wired mr-2"></i>IP Class Identifier</h4>
                             <input type="text" id="ip-class-input" placeholder="Ej: 192.168.1.1" class="tool-input w-full p-2 rounded font-mono text-sm">
@@ -318,16 +327,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Buscador MAC -->
                         <div class="glass-effect rounded-lg p-6 space-y-4">
                             <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-search mr-2"></i>MAC OUI Lookup</h4>
                             <input type="text" id="mac-input" placeholder="Ej: 00:1A:2B" class="tool-input w-full p-2 rounded font-mono text-sm">
                             <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
                                 <p class="text-[9px] text-slate-500 uppercase mb-1">Resultado</p>
-                                <span id="mac-res" class="text-slate-100 font-mono text-xs italic">Escribe los primeros 6 caracteres...</span>
+                                <span id="mac-res" class="text-slate-100 font-mono text-xs italic">---</span>
                             </div>
                         </div>
-                        <!-- Subnet Calculator -->
                         <div class="glass-effect rounded-lg p-6 space-y-4">
                             <h4 class="text-lg font-bold text-[#64ffda] font-mono">Subnet Calculator</h4>
                             <div class="flex items-center space-x-2">
@@ -440,7 +447,7 @@
         document.getElementById('mac-input').oninput = function() {
             const val = this.value.toUpperCase().replace(/[:.-]/g, "").substring(0, 6);
             const db = { "00000C": "Cisco", "000C29": "VMware", "080027": "VirtualBox", "28CFDA": "Apple", "0016EA": "Intel" };
-            document.getElementById('mac-res').innerText = db[val] || "No encontrado en lista rápida";
+            document.getElementById('mac-res').innerText = db[val] || "No encontrado";
         };
 
         // 3. Subnetting
@@ -493,18 +500,12 @@
                     "size": { "value": 2, "random": true },
                     "line_linked": { "enable": true, "distance": 150, "color": "#64ffda", "opacity": 0.1, "width": 1 },
                     "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out", "bounce": false }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }
-                },
-                "retina_detect": true
+                }
             });
 
             const obs = new IntersectionObserver(ents => ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:0.1});
             document.querySelectorAll('.section').forEach(s => obs.observe(s));
             
-            // Terminal simple
             const ti = document.getElementById('terminal-input'), tb = document.getElementById('terminal-body'), tp = document.getElementById('terminal-prompt');
             if(tp) tp.innerHTML = `<span class="text-slate-600">brian@portfolio</span><span class="text-[#64ffda]">:~$</span>`;
             if(ti) ti.onkeydown = (e) => {
@@ -516,7 +517,6 @@
                     if(v === 'help') tb.innerHTML += "<div class='text-[10px] opacity-60'>Comandos: ls, clear, whoami, tools</div>";
                     else if(v === 'tools') showView('tools');
                     else if(v === 'clear') tb.innerHTML = "";
-                    else if(v === 'whoami') tb.innerHTML += "<div>brian_garcia</div>";
                     ti.value = "";
                     tb.scrollTop = tb.scrollHeight;
                 }
