@@ -1,527 +1,750 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portafolio de Brian Garcia, profesional de informática y ciberseguridad. Herramientas de conversión, análisis de redes y ASIR.">
-    <title>Brian Garcia - Ciberseguridad & ASIR</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portafolio de Brian Garcia, profesional de informática y ciberseguridad. Herramientas de conversión, análisis de redes y ASIR.">
+<title>Brian Garcia - Ciberseguridad & ASIR</title>
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none; 
-        }
+<!-- Open Graph / redes sociales -->
+<meta property="og:title" content="Brian Garcia - Ciberseguridad & ASIR">
+<meta property="og:description" content="Portafolio de Brian Garcia, profesional de ciberseguridad y ASIR. Proyectos, write-ups y herramientas de red interactivas.">
+<meta property="og:image" content="https://briang25.github.io/Mi-Portafolio/assets/foto_perfil.png">
+<meta property="og:url" content="https://briang25.github.io/Mi-Portafolio/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 
-        .content-container {
-            position: relative;
-            z-index: 1;
-        }
+<!-- Favicon (SVG inline, sin archivo extra) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a192f%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 fill=%22%2364ffda%22 text-anchor=%22middle%22 font-family=%22monospace%22>B</text></svg>">
 
-        .glass-effect {
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        .nav-link {
-            position: relative;
-            color: #ccd6f6;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a192f;
+  color: #ccd6f6;
+  overflow-x: hidden;
+}
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.content-container {
+  position: relative;
+  z-index: 1;
+}
+.glass-effect {
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.nav-link {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: #ccd6f6;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #64ffda;
+  transition: width 0.3s ease;
+}
+.nav-link:hover, .nav-link.active, .nav-link:focus-visible {
+  color: #64ffda;
+}
+.nav-link:hover::after, .nav-link.active::after, .nav-link:focus-visible::after {
+  width: 100%;
+}
+.section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ciber-heading span.font-mono {
+  font-family: 'Share Tech Mono', monospace;
+  color: #64ffda;
+}
+.tool-input {
+  background: rgba(17, 34, 64, 0.7);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  color: #ccd6f6;
+  transition: all 0.3s ease;
+}
+.tool-input:focus {
+  border-color: #64ffda;
+  outline: none;
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
+}
+.tool-input.tool-error {
+  border-color: #f87171;
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.2);
+}
+/* Animación de iluminación de la silueta */
+@keyframes silhouette-glow {
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.55)); }
+  50% { filter: drop-shadow(0 0 30px rgba(100, 255, 218, 0.85)); }
+}
+.animate-silhouette {
+  animation: silhouette-glow 3s infinite ease-in-out;
+  background: transparent !important;
+  border: none !important;
+}
+.view-hidden {
+  display: none;
+}
+.category-title {
+  border-left: 4px solid #64ffda;
+  padding-left: 1rem;
+}
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #64ffda;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: #64ffda;
-        }
-
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-
-        .section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .ciber-heading span.font-mono {
-            font-family: 'Share Tech Mono', monospace;
-            color: #64ffda;
-        }
-
-        .tool-input {
-            background: rgba(17, 34, 64, 0.7);
-            border: 1px solid rgba(100, 255, 218, 0.2);
-            color: #ccd6f6;
-            transition: all 0.3s ease;
-        }
-        .tool-input:focus {
-            border-color: #64ffda;
-            outline: none;
-            box-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
-        }
-
-        /* Animación de iluminación de la silueta */
-        @keyframes silhouette-glow {
-            0%, 100% { filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.55)); }
-            50% { filter: drop-shadow(0 0 30px rgba(100, 255, 218, 0.85)); }
-        }
-        .animate-silhouette {
-            animation: silhouette-glow 3s infinite ease-in-out;
-            /* Importante: para que no se vea el fondo cuadrado, la imagen no debe tener bordes o bg */
-            background: transparent !important;
-            border: none !important;
-        }
-
-        .view-hidden {
-            display: none;
-        }
-
-        .category-title {
-            border-left: 4px solid #64ffda;
-            padding-left: 1rem;
-        }
-    </style>
+/* --- ROADMAP DE FORMACIÓN (estilo TryHackMe path) --- */
+.roadmap {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-left: 2.5rem;
+}
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, #64ffda 0%, #64ffda 40%, #334155 40%, #334155 100%);
+}
+.roadmap-item {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+.roadmap-item:last-child { padding-bottom: 0; }
+.roadmap-node {
+  position: absolute;
+  left: -2.5rem;
+  top: 2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  z-index: 2;
+  border: 2px solid #334155;
+  background: #0a192f;
+  color: #64748b;
+}
+.roadmap-item.completed .roadmap-node {
+  background: #64ffda;
+  border-color: #64ffda;
+  color: #0a192f;
+}
+.roadmap-item.current .roadmap-node {
+  background: #0a192f;
+  border-color: #64ffda;
+  color: #64ffda;
+  box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.15);
+  animation: roadmap-pulse 2s infinite;
+}
+@keyframes roadmap-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(100, 255, 218, 0.08); }
+}
+.roadmap-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.roadmap-item.completed .roadmap-badge { background: rgba(100,255,218,0.12); color: #64ffda; }
+.roadmap-item.current .roadmap-badge { background: rgba(250,204,21,0.12); color: #facc15; }
+.roadmap-item.planned .roadmap-badge { background: rgba(148,163,184,0.12); color: #94a3b8; }
+</style>
 </head>
-
 <body class="w-full">
+<div id="particles-js"></div>
+<div class="content-container">
 
-    <div id="particles-js"></div>
+<!-- HEADER -->
+<header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <button type="button" onclick="showView('portfolio')" class="text-2xl font-bold text-[#64ffda] font-mono cursor-pointer bg-transparent border-none">Brian G.</button>
+    <div class="hidden md:flex space-x-8">
+      <button type="button" onclick="showView('portfolio', 'sobre-mi')" class="nav-link font-medium">Sobre Mí</button>
+      <button type="button" onclick="showView('portfolio', 'habilidades')" class="nav-link font-medium">Competencias</button>
+      <button type="button" onclick="showView('portfolio', 'proyectos')" class="nav-link font-medium">Proyectos</button>
+      <button type="button" onclick="showView('portfolio', 'writeups')" class="nav-link font-medium">Write-ups</button>
+      <button type="button" onclick="showView('portfolio', 'formacion')" class="nav-link font-medium">Formación</button>
+      <button type="button" onclick="showView('tools')" class="nav-link font-medium text-[#64ffda]">Tools</button>
+      <button type="button" onclick="showView('portfolio', 'ctf')" class="nav-link font-medium">Reto CTF</button>
+      <button type="button" onclick="showView('portfolio', 'contacto')" class="nav-link font-medium">Contacto</button>
+    </div>
+    <button id="mobile-menu-button" class="md:hidden text-2xl" aria-label="Abrir menú" aria-expanded="false">
+      <i class="fas fa-bars text-[#64ffda]"></i>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#112240] p-4 text-center space-y-4">
+    <button type="button" onclick="showView('portfolio', 'sobre-mi')" class="block w-full py-2 nav-link">Sobre Mí</button>
+    <button type="button" onclick="showView('portfolio', 'habilidades')" class="block w-full py-2 nav-link">Competencias</button>
+    <button type="button" onclick="showView('portfolio', 'proyectos')" class="block w-full py-2 nav-link">Proyectos</button>
+    <button type="button" onclick="showView('portfolio', 'writeups')" class="block w-full py-2 nav-link">Write-ups</button>
+    <button type="button" onclick="showView('portfolio', 'formacion')" class="block w-full py-2 nav-link">Formación</button>
+    <button type="button" onclick="showView('tools')" class="block w-full py-2 nav-link text-[#64ffda]">Tools</button>
+    <button type="button" onclick="showView('portfolio', 'ctf')" class="block w-full py-2 nav-link">Reto CTF</button>
+    <button type="button" onclick="showView('portfolio', 'contacto')" class="block w-full py-2 nav-link">Contacto</button>
+  </div>
+</header>
 
-    <div class="content-container">
-        <!-- HEADER -->
-        <header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-            <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-                <a onclick="showView('portfolio')" class="text-2xl font-bold text-[#64ffda] font-mono cursor-pointer">Brian G.</a>
-                <div class="hidden md:flex space-x-8">
-                    <a onclick="showView('portfolio', 'sobre-mi')" class="nav-link font-medium">Sobre Mí</a>
-                    <a onclick="showView('portfolio', 'habilidades')" class="nav-link font-medium">Competencias</a>
-                    <a onclick="showView('portfolio', 'proyectos')" class="nav-link font-medium">Proyectos</a>
-                    <a onclick="showView('portfolio', 'writeups')" class="nav-link font-medium">Write-ups</a>
-                    <a onclick="showView('tools')" class="nav-link font-medium text-[#64ffda]">Tools</a>
-                    <a onclick="showView('portfolio', 'ctf')" class="nav-link font-medium">Reto CTF</a>
-                    <a onclick="showView('portfolio', 'contacto')" class="nav-link font-medium">Contacto</a>
-                </div>
-                <button id="mobile-menu-button" class="md:hidden text-2xl" aria-label="Abrir menú">
-                    <i class="fas fa-bars text-[#64ffda]"></i>
-                </button>
-            </nav>
-            <div id="mobile-menu" class="hidden md:hidden bg-[#112240] p-4 text-center space-y-4">
-                <a onclick="showView('portfolio', 'sobre-mi')" class="block py-2 nav-link">Sobre Mí</a>
-                <a onclick="showView('portfolio', 'habilidades')" class="block py-2 nav-link">Competencias</a>
-                <a onclick="showView('portfolio', 'proyectos')" class="block py-2 nav-link">Proyectos</a>
-                <a onclick="showView('portfolio', 'writeups')" class="block py-2 nav-link">Write-ups</a>
-                <a onclick="showView('tools')" class="block py-2 nav-link text-[#64ffda]">Tools</a>
-                <a onclick="showView('portfolio', 'ctf')" class="block py-2 nav-link">Reto CTF</a>
-                <a onclick="showView('portfolio', 'contacto')" class="block py-2 nav-link">Contacto</a>
-            </div>
-        </header>
+<!-- VISTA: PORTAFOLIO COMPLETO -->
+<main id="portfolio-view" class="container mx-auto px-4 sm:px-6">
 
-        <!-- VISTA: PORTAFOLIO COMPLETO -->
-        <main id="portfolio-view" class="container mx-auto px-4 sm:px-6">
-            
-            <!-- Inicio -->
-            <section id="inicio" class="min-h-screen flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-20">
-                <div class="order-2 lg:order-1 text-center lg:text-left">
-                    <p class="text-[#64ffda] text-lg font-mono mb-4">Hola, mi nombre es</p>
-                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-100">Brian Garcia.</h1>
-                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-400 mt-2">Aseguro el mundo digital.</h2>
-                    <p class="text-slate-400 max-w-xl mt-6 mx-auto lg:mx-0 text-lg">
-                        Profesional de la ciberseguridad y ASIR enfocado en administración de sistemas, redes y análisis de vulnerabilidades.
-                    </p>
-                    <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
-                        <a href="CV_Brayan_Garcia.pdf" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3 border-2 border-[#64ffda] text-[#64ffda] font-medium rounded-md overflow-hidden transition-all duration-300 hover:text-[#0a192f]">
-                            <span class="absolute inset-0 bg-[#64ffda] transition-all duration-300 ease-out transform -translate-x-full group-hover:translate-x-0"></span>
-                            <span class="relative">Ver CV</span>
-                        </a>
-                        <a onclick="showView('tools')" class="group relative inline-flex items-center justify-center px-6 py-3 border-2 border-slate-400 text-slate-400 font-medium rounded-md overflow-hidden transition-all duration-300 hover:text-[#0a192f] hover:border-[#64ffda] cursor-pointer">
-                            <span class="absolute inset-0 bg-[#64ffda] transition-all duration-300 ease-out transform -translate-x-full group-hover:translate-x-0"></span>
-                            <span class="relative">Explorar Tools</span>
-                        </a>
-                    </div>
-                </div>
-                <!-- CONTENEDOR DE IMAGEN OPTIMIZADO PARA SILUETA -->
-                <div class="order-1 lg:order-2 relative group w-72 h-72 sm:w-80 sm:h-80 lg:w-[500px] lg:h-[500px] flex-shrink-0 flex items-center justify-center">
-                    <!-- Brillo ambiental de fondo -->
-                    <div class="absolute inset-0 bg-[#64ffda]/10 blur-[100px] rounded-full group-hover:bg-[#64ffda]/20 transition-all duration-700"></div>
-                    
-                    <!-- Imagen de perfil: sin estilos de contenedor cuadrado y con drop-shadow -->
-                    <img class="relative w-full h-full object-contain transition-all duration-500 group-hover:scale-105 animate-silhouette" 
-                         src="./assets/foto_perfil.png" 
-                         alt="Brian Garcia">
-                </div>
-            </section>
-
-            <!-- Sobre Mí -->
-            <section id="sobre-mi" class="section py-20 md:py-32">
-                <h2 class="text-3xl font-bold text-slate-100 mb-8 flex items-center ciber-heading">Sobre Mí <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
-                <div class="max-w-4xl mx-auto text-slate-400 space-y-4 text-lg">
-                    <p>Soy un profesional técnico en **Administración de Sistemas Informáticos en Red (ASIR)** con formación especializada en ciberseguridad. Mi enfoque combina la gestión de infraestructuras críticas con la protección de datos y análisis de incidentes.</p>
-                    <p>Manejo entornos Windows y Linux, y domino herramientas para la monitorización de eventos, auditoría de sistemas y Hardening.</p>
-                </div>
-            </section>
-
-            <!-- Competencias -->
-            <section id="habilidades" class="section py-20 md:py-32">
-                <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Competencias Técnicas <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
-                        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Seguridad y Redes</h3>
-                        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
-                            <li>Administración de sistemas y redes</li>
-                            <li>Monitorización de eventos y análisis de logs</li>
-                            <li>Gestión de incidentes de seguridad</li>
-                            <li>SIEM y correlación de eventos</li>
-                        </ul>
-                    </div>
-                    <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
-                        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Análisis y Pentesting</h3>
-                        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
-                            <li>Análisis de vulnerabilidades (Nmap, Nessus)</li>
-                            <li>Pruebas de penetración básicas (Metasploit)</li>
-                            <li>Herramientas de enumeración (Gobuster, Wireshark)</li>
-                        </ul>
-                    </div>
-                    <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
-                        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Sistemas (ASIR)</h3>
-                        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
-                            <li>Windows Server & Linux (Ubuntu)</li>
-                            <li>Virtualización (VirtualBox, VMware)</li>
-                            <li>Protocolos: HTTP, DNS, SSH, FTP</li>
-                            <li>Backups y recuperación de desastres</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Proyectos -->
-            <section id="proyectos" class="section py-20 md:py-32 text-center">
-                <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading text-left">Proyectos <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
-                <div class="max-w-2xl mx-auto glass-effect rounded-lg p-8 group transition-all hover:-translate-y-2">
-                    <div class="text-[#64ffda] mb-4"><i class="fas fa-server text-6xl"></i></div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-2">Máquina Virtual Vulnerable (2025)</h3>
-                    <p class="text-slate-400 mb-4">Proyecto CTF educativo basado en Ubuntu Server para entrenamiento en defensa y explotación.</p>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Ubuntu Server</span>
-                        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Nmap</span>
-                        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Docker</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Write-ups -->
-            <section id="writeups" class="section py-20 md:py-32">
-                <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Write-ups y Análisis <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="glass-effect rounded-lg p-6 transition-all hover:-translate-y-2">
-                        <div class="flex justify-between mb-4">
-                            <h3 class="font-bold text-slate-100">Blue (TryHackMe)</h3>
-                            <span class="bg-blue-900 text-blue-300 text-[10px] px-2 py-1 rounded">TryHackMe</span>
-                        </div>
-                        <p class="text-slate-400 text-sm mb-4">Análisis de la vulnerabilidad MS17-010 y explotación EternalBlue.</p>
-                        <a href="#" class="text-[#64ffda] text-xs font-bold hover:underline">LEER COMPLETO →</a>
-                    </div>
-                    <div class="glass-effect rounded-lg p-6 transition-all hover:-translate-y-2">
-                        <div class="flex justify-between mb-4">
-                            <h3 class="font-bold text-slate-100">Lame (Hack The Box)</h3>
-                            <span class="bg-green-900 text-green-300 text-[10px] px-2 py-1 rounded">Hack The Box</span>
-                        </div>
-                        <p class="text-slate-400 text-sm mb-4">Explotación de servicio Samba y escalada de privilegios.</p>
-                        <a href="#" class="text-[#64ffda] text-xs font-bold hover:underline">LEER COMPLETO →</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Reto CTF -->
-            <section id="ctf" class="section py-20 md:py-32">
-                <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Reto CTF <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
-                <div id="terminal" class="w-full max-w-4xl mx-auto h-[400px] glass-effect rounded-lg overflow-hidden flex flex-col font-mono text-sm" onclick="document.getElementById('terminal-input').focus()">
-                    <div class="bg-slate-800/50 p-2 flex items-center justify-between">
-                        <div class="flex space-x-2"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div></div>
-                        <div class="text-slate-400 text-[10px]">brian@portfolio: ~</div>
-                        <div></div>
-                    </div>
-                    <div id="terminal-body" class="flex-grow p-4 overflow-y-auto text-slate-300 space-y-1"></div>
-                    <div class="bg-gray-900 p-2 flex items-center">
-                        <span id="terminal-prompt" class="text-xs"></span>
-                        <input type="text" id="terminal-input" class="bg-transparent border-none text-slate-300 w-full ml-2 focus:outline-none" autocomplete="off">
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contacto -->
-            <section id="contacto" class="section py-20 md:py-32 text-center max-w-2xl mx-auto">
-                <h2 class="text-3xl font-bold text-slate-100 mb-4">Contacto</h2>
-                <p class="text-slate-400 mb-10">¿Buscas un perfil técnico para tu equipo? Mi bandeja de entrada siempre está abierta.</p>
-                <a href="mailto:briangarcia5558@gmail.com" class="inline-flex px-10 py-4 border-2 border-[#64ffda] text-[#64ffda] font-bold rounded-md hover:bg-[#64ffda] hover:text-[#0a192f] transition-all uppercase tracking-widest text-xs">¡Di Hola!</a>
-                
-                <div class="flex space-x-8 justify-center text-3xl text-slate-400 mt-12">
-                    <a href="https://www.linkedin.com/in/brian-garcia-a43b1117b/" target="_blank" class="hover:text-[#64ffda] transition-colors"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/BrianG25" target="_blank" class="hover:text-[#64ffda] transition-colors"><i class="fab fa-github"></i></a>
-                    <a href="https://tryhackme.com/p/TuUsuario" target="_blank" class="hover:text-[#64ffda] transition-colors"><i class="fas fa-cube"></i></a>
-                </div>
-            </section>
-        </main>
-
-        <!-- VISTA: TOOLS -->
-        <main id="tools-view" class="view-hidden container mx-auto px-4 sm:px-6 pt-32 pb-20">
-            <div class="max-w-6xl mx-auto">
-                <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
-                    <h2 class="text-4xl font-bold text-slate-100 ciber-heading">Cybersecurity <span class="text-[#64ffda] font-mono">Toolkit</span></h2>
-                    <button onclick="showView('portfolio')" class="text-slate-400 hover:text-[#64ffda] transition-colors flex items-center font-mono">
-                        <i class="fas fa-arrow-left mr-2"></i> Volver al Inicio
-                    </button>
-                </div>
-
-                <!-- CATEGORÍA: NETWORKING & ASIR -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Networking & ASIR</h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-network-wired mr-2"></i>IP Class Identifier</h4>
-                            <input type="text" id="ip-class-input" placeholder="Ej: 192.168.1.1" class="tool-input w-full p-2 rounded font-mono text-sm">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
-                                    <p class="text-[9px] text-slate-500 uppercase">Clase</p>
-                                    <span id="ip-class-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
-                                </div>
-                                <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
-                                    <p class="text-[9px] text-slate-500 uppercase">Tipo</p>
-                                    <span id="ip-type-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-search mr-2"></i>MAC OUI Lookup</h4>
-                            <input type="text" id="mac-input" placeholder="Ej: 00:1A:2B" class="tool-input w-full p-2 rounded font-mono text-sm">
-                            <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
-                                <p class="text-[9px] text-slate-500 uppercase mb-1">Resultado</p>
-                                <span id="mac-res" class="text-slate-100 font-mono text-xs italic">---</span>
-                            </div>
-                        </div>
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-[#64ffda] font-mono">Subnet Calculator</h4>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-slate-100">/</span>
-                                <input type="number" id="cidr-input" min="0" max="32" placeholder="24" class="tool-input w-full p-2 rounded font-mono text-sm">
-                            </div>
-                            <div class="grid grid-cols-2 gap-4 text-[10px] font-mono">
-                                <div class="bg-slate-900/50 p-2 rounded">Mask: <span id="mask-out" class="text-[#64ffda]">255.255.255.0</span></div>
-                                <div class="bg-slate-900/50 p-2 rounded">Hosts: <span id="hosts-out" class="text-[#64ffda]">254</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CATEGORÍA: CONVERSIÓN DE BASES -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Conversión de Bases</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Binario</h4>
-                            <input type="number" id="d-b" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
-                            <input type="text" id="b-d" placeholder="Binario" class="tool-input w-full p-1 rounded font-mono text-xs">
-                        </div>
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Hex</h4>
-                            <input type="number" id="d-h" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
-                            <input type="text" id="h-d" placeholder="Hex" class="tool-input w-full p-1 rounded font-mono text-xs">
-                        </div>
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-md font-bold text-[#64ffda] font-mono">Texto <-> Binario</h4>
-                            <input type="text" id="t-b" placeholder="Texto..." class="tool-input w-full p-1 rounded font-mono text-xs">
-                            <textarea id="b-t" placeholder="Binario..." class="tool-input w-full p-1 rounded font-mono text-[9px] h-12 resize-none"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CATEGORÍA: SEGURIDAD -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Seguridad & Cripto</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-[#64ffda] font-mono">SHA-256 Hasher</h4>
-                            <input type="text" id="hash-in" placeholder="Texto plano..." class="tool-input w-full p-2 rounded font-mono text-xs">
-                            <div id="hash-out" class="bg-slate-900/50 p-2 rounded border border-slate-700 text-[9px] font-mono text-[#64ffda] break-all">---</div>
-                        </div>
-                        <div class="glass-effect rounded-lg p-6 space-y-4">
-                            <h4 class="text-lg font-bold text-[#64ffda] font-mono">Pass Generator</h4>
-                            <input type="range" id="pass-len" min="8" max="64" value="20" class="w-full accent-[#64ffda]">
-                            <div class="flex justify-between text-[9px] text-slate-500"><span>LEN</span> <span id="pass-len-val">20</span></div>
-                            <input type="text" id="pass-res" readonly class="tool-input w-full p-1 rounded font-mono text-center text-xs">
-                            <button onclick="genP()" class="w-full bg-[#64ffda]/10 text-[#64ffda] py-2 rounded border border-[#64ffda]/30 font-bold text-[10px] hover:bg-[#64ffda]/20 transition-all uppercase">Generar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="py-12 border-t border-slate-800/50 mt-20">
-            <p class="text-sm font-mono text-center text-slate-500">Brian Garcia © 2026 | ASIR & Cybersecurity Portfolio</p>
-        </footer>
+  <!-- Inicio -->
+  <section id="inicio" class="min-h-screen flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-20">
+    <div class="order-2 lg:order-1 text-center lg:text-left">
+      <p class="text-[#64ffda] text-lg font-mono mb-4">Hola, mi nombre es</p>
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-100">Brian Garcia.</h1>
+      <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-400 mt-2">Aseguro el mundo digital.</h2>
+      <p class="text-slate-400 max-w-xl mt-6 mx-auto lg:mx-0 text-lg">
+        Profesional de la ciberseguridad y ASIR enfocado en administración de sistemas, redes y análisis de vulnerabilidades.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
+        <a href="CV_Brayan_Garcia.pdf" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3 border-2 border-[#64ffda] text-[#64ffda] font-medium rounded-md overflow-hidden transition-all duration-300 hover:text-[#0a192f]">
+          <span class="absolute inset-0 bg-[#64ffda] transition-all duration-300 ease-out transform -translate-x-full group-hover:translate-x-0"></span>
+          <span class="relative">Ver CV</span>
+        </a>
+        <button type="button" onclick="showView('tools')" class="group relative inline-flex items-center justify-center px-6 py-3 border-2 border-slate-400 text-slate-400 font-medium rounded-md overflow-hidden transition-all duration-300 hover:text-[#0a192f] hover:border-[#64ffda] cursor-pointer">
+          <span class="absolute inset-0 bg-[#64ffda] transition-all duration-300 ease-out transform -translate-x-full group-hover:translate-x-0"></span>
+          <span class="relative">Explorar Tools</span>
+        </button>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // --- NAVEGACIÓN SPA ---
-        function showView(viewId, sectionId = null) {
-            const pv = document.getElementById('portfolio-view'), tv = document.getElementById('tools-view');
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.add('hidden');
+    <div class="order-1 lg:order-2 relative group w-72 h-72 sm:w-80 sm:h-80 lg:w-[500px] lg:h-[500px] flex-shrink-0 flex items-center justify-center">
+      <div class="absolute inset-0 bg-[#64ffda]/10 blur-[100px] rounded-full group-hover:bg-[#64ffda]/20 transition-all duration-700"></div>
+      <img class="relative w-full h-full object-contain transition-all duration-500 group-hover:scale-105 animate-silhouette"
+        src="./assets/foto_perfil.png"
+        alt="Brian Garcia">
+    </div>
+  </section>
 
-            if (viewId === 'portfolio') {
-                tv.classList.add('view-hidden');
-                pv.classList.remove('view-hidden');
-                if (sectionId) {
-                    setTimeout(() => {
-                        const target = document.getElementById(sectionId);
-                        if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            } else {
-                pv.classList.add('view-hidden');
-                tv.classList.remove('view-hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
+  <!-- Sobre Mí -->
+  <section id="sobre-mi" class="section py-20 md:py-32">
+    <h2 class="text-3xl font-bold text-slate-100 mb-8 flex items-center ciber-heading">Sobre Mí <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <div class="max-w-4xl mx-auto text-slate-400 space-y-4 text-lg">
+      <p>Soy un profesional técnico en <strong class="text-slate-200 font-semibold">Administración de Sistemas Informáticos en Red (ASIR)</strong> con formación especializada en ciberseguridad. Mi enfoque combina la gestión de infraestructuras críticas con la protección de datos y análisis de incidentes.</p>
+      <p>Manejo entornos Windows y Linux, y domino herramientas para la monitorización de eventos, auditoría de sistemas y Hardening.</p>
+    </div>
+  </section>
 
-        // --- LÓGICA DE TOOLS ---
+  <!-- Competencias -->
+  <section id="habilidades" class="section py-20 md:py-32">
+    <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Competencias Técnicas <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
+        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Seguridad y Redes</h3>
+        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
+          <li>Administración de sistemas y redes</li>
+          <li>Monitorización de eventos y análisis de logs</li>
+          <li>Gestión de incidentes de seguridad</li>
+          <li>SIEM y correlación de eventos</li>
+        </ul>
+      </div>
+      <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
+        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Análisis y Pentesting</h3>
+        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
+          <li>Análisis de vulnerabilidades (Nmap, Nessus)</li>
+          <li>Pruebas de penetración básicas (Metasploit)</li>
+          <li>Herramientas de enumeración (Gobuster, Wireshark)</li>
+        </ul>
+      </div>
+      <div class="glass-effect rounded-lg p-6 h-full transition-transform hover:-translate-y-2">
+        <h3 class="text-xl font-bold text-[#64ffda] mb-4">Sistemas (ASIR)</h3>
+        <ul class="text-slate-400 space-y-2 list-disc list-inside text-sm">
+          <li>Windows Server & Linux (Ubuntu)</li>
+          <li>Virtualización (VirtualBox, VMware)</li>
+          <li>Protocolos: HTTP, DNS, SSH, FTP</li>
+          <li>Backups y recuperación de desastres</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        // 1. IP Classifier
-        document.getElementById('ip-class-input').oninput = function() {
-            const ip = this.value.trim();
-            const parts = ip.split('.');
-            if (parts.length < 1 || parts[0] === "") return;
-            const first = parseInt(parts[0]);
-            let cls = "Inválida", type = "---";
-            if (first >= 1 && first <= 126) cls = "Clase A";
-            else if (first >= 128 && first <= 191) cls = "Clase B";
-            else if (first >= 192 && first <= 223) cls = "Clase C";
-            if (first === 10) type = "Privada";
-            else if (first === 172 && parseInt(parts[1]) >= 16 && parseInt(parts[1]) <= 31) type = "Privada";
-            else if (first === 192 && parseInt(parts[1]) === 168) type = "Privada";
-            else if (cls !== "Inválida") type = "Pública";
-            document.getElementById('ip-class-res').innerText = cls;
-            document.getElementById('ip-type-res').innerText = type;
-        };
+  <!-- Proyectos -->
+  <section id="proyectos" class="section py-20 md:py-32 text-center">
+    <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading text-left">Proyectos <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <div class="max-w-2xl mx-auto glass-effect rounded-lg p-8 group transition-all hover:-translate-y-2">
+      <div class="text-[#64ffda] mb-4"><i class="fas fa-server text-6xl"></i></div>
+      <h3 class="text-xl font-bold text-slate-100 mb-2">Máquina Virtual Vulnerable (2025)</h3>
+      <p class="text-slate-400 mb-4">Proyecto CTF educativo basado en Ubuntu Server para entrenamiento en defensa y explotación.</p>
+      <div class="flex flex-wrap gap-2 justify-center">
+        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Ubuntu Server</span>
+        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Nmap</span>
+        <span class="bg-slate-700 text-[#64ffda] text-[10px] px-2 py-1 rounded">Docker</span>
+      </div>
+    </div>
+  </section>
 
-        // 2. MAC Lookup
-        document.getElementById('mac-input').oninput = function() {
-            const val = this.value.toUpperCase().replace(/[:.-]/g, "").substring(0, 6);
-            const db = { "00000C": "Cisco", "000C29": "VMware", "080027": "VirtualBox", "28CFDA": "Apple", "0016EA": "Intel" };
-            document.getElementById('mac-res').innerText = db[val] || "No encontrado";
-        };
+  <!-- Write-ups -->
+  <section id="writeups" class="section py-20 md:py-32">
+    <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Write-ups y Análisis <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="glass-effect rounded-lg p-6 transition-all hover:-translate-y-2">
+        <div class="flex justify-between mb-4">
+          <h3 class="font-bold text-slate-100">Blue (TryHackMe)</h3>
+          <span class="bg-blue-900 text-blue-300 text-[10px] px-2 py-1 rounded">TryHackMe</span>
+        </div>
+        <p class="text-slate-400 text-sm mb-4">Análisis de la vulnerabilidad MS17-010 y explotación EternalBlue.</p>
+        <a href="https://tryhackme.com/p/BryanG" target="_blank" rel="noopener noreferrer" class="text-[#64ffda] text-xs font-bold hover:underline">LEER COMPLETO →</a>
+      </div>
+      <div class="glass-effect rounded-lg p-6 transition-all hover:-translate-y-2">
+        <div class="flex justify-between mb-4">
+          <h3 class="font-bold text-slate-100">Lame (Hack The Box)</h3>
+          <span class="bg-green-900 text-green-300 text-[10px] px-2 py-1 rounded">Hack The Box</span>
+        </div>
+        <p class="text-slate-400 text-sm mb-4">Explotación de servicio Samba y escalada de privilegios.</p>
+        <!-- TODO: sustituir por tu perfil/write-up real de HTB -->
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-[#64ffda] text-xs font-bold hover:underline">LEER COMPLETO →</a>
+      </div>
+    </div>
+  </section>
 
-        // 3. Subnetting
-        document.getElementById('cidr-input').oninput = function() {
-            let cidr = parseInt(this.value); if(cidr > 32) cidr = 32;
-            let mask = []; let temp = cidr;
-            for(let i=0; i<4; i++) { let n = Math.min(temp, 8); mask.push(256 - Math.pow(2, 8-n)); temp -= n; }
-            document.getElementById('mask-out').innerText = mask.join('.');
-            document.getElementById('hosts-out').innerText = cidr >= 31 ? 0 : (Math.pow(2, 32-cidr) - 2).toLocaleString();
-        };
+  <!-- Formación -->
+  <section id="formacion" class="section py-20 md:py-32">
+    <h2 class="text-3xl font-bold text-slate-100 mb-4 flex items-center ciber-heading">Formación <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <p class="text-slate-400 mb-12 max-w-2xl">Mi ruta de aprendizaje en ciberseguridad y sistemas, de lo ya conseguido a lo que viene.</p>
 
-        // 4. Conversores Duales
-        function setupDual(id1, id2, f1, f2) {
-            const e1 = document.getElementById(id1), e2 = document.getElementById(id2);
-            e1.oninput = () => e2.value = e1.value ? f1(e1.value) : "";
-            e2.oninput = () => e1.value = e2.value ? f2(e2.value) : "";
-        }
-        setupDual('d-b', 'b-d', v => parseInt(v).toString(2), v => parseInt(v, 2) || 0);
-        setupDual('d-h', 'h-d', v => parseInt(v).toString(16).toUpperCase(), v => parseInt(v, 16) || 0);
-        setupDual('t-b', 'b-t', 
-            v => v.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '),
-            v => v.split(/\s+/).map(b => String.fromCharCode(parseInt(b, 2))).join('')
-        );
+    <div class="roadmap">
 
-        // 5. Crypto & Pass
-        document.getElementById('hash-in').oninput = async function() {
-            if(!this.value) { document.getElementById('hash-out').innerText = "---"; return; }
-            const b = new TextEncoder().encode(this.value);
-            const h = await crypto.subtle.digest('SHA-256', b);
-            document.getElementById('hash-out').innerText = Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
-        };
-        function genP() {
-            const l = document.getElementById('pass-len').value;
-            const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-            let r = ""; for(let i=0; i<l; i++) r += c.charAt(Math.floor(Math.random()*c.length));
-            document.getElementById('pass-res').value = r;
-        }
-        document.getElementById('pass-len').oninput = function() { document.getElementById('pass-len-val').innerText = this.value; };
+      <div class="roadmap-item completed">
+        <div class="roadmap-node"><i class="fas fa-check"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">Técnico en Sistemas Informáticos</h3>
+            <span class="roadmap-badge">Completado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Primera formación reglada en informática, base de mantenimiento de equipos, sistemas operativos y redes locales.</p>
+        </div>
+      </div>
 
-        // --- INICIALIZACIÓN ---
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('mobile-menu-button').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
-            
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#64ffda" },
-                    "shape": { "type": "triangle" },
-                    "opacity": { "value": 0.2, "random": true },
-                    "size": { "value": 2, "random": true },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#64ffda", "opacity": 0.1, "width": 1 },
-                    "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out", "bounce": false }
-                }
-            });
+      <div class="roadmap-item completed">
+        <div class="roadmap-node"><i class="fas fa-check"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">Certificado de Profesionalidad IFCT0109 — Seguridad Informática</h3>
+            <span class="roadmap-badge">Completado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Formación oficial en fundamentos de seguridad de sistemas y redes.</p>
+        </div>
+      </div>
 
-            const obs = new IntersectionObserver(ents => ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:0.1});
-            document.querySelectorAll('.section').forEach(s => obs.observe(s));
-            
-            const ti = document.getElementById('terminal-input'), tb = document.getElementById('terminal-body'), tp = document.getElementById('terminal-prompt');
-            if(tp) tp.innerHTML = `<span class="text-slate-600">brian@portfolio</span><span class="text-[#64ffda]">:~$</span>`;
-            if(ti) ti.onkeydown = (e) => {
-                if(e.key === 'Enter') {
-                    const v = ti.value.trim();
-                    const l = document.createElement('div');
-                    l.innerHTML = `<span class="text-[#64ffda]">$ ${v}</span>`;
-                    tb.appendChild(l);
-                    if(v === 'help') tb.innerHTML += "<div class='text-[10px] opacity-60'>Comandos: ls, clear, whoami, tools</div>";
-                    else if(v === 'tools') showView('tools');
-                    else if(v === 'clear') tb.innerHTML = "";
-                    ti.value = "";
-                    tb.scrollTop = tb.scrollHeight;
-                }
-            };
-        });
-    </script>
+      <div class="roadmap-item current">
+        <div class="roadmap-node"><i class="fas fa-spinner"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">Grado Superior ASIR (Administración de Sistemas Informáticos en Red)</h3>
+            <span class="roadmap-badge">En curso</span>
+          </div>
+          <p class="text-slate-400 text-sm">Modalidad online (iFP). Prácticas: despliegue de servidor, alta de equipos en dominio, creación de GPOs y aplicación de políticas.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item current">
+        <div class="roadmap-node"><i class="fas fa-spinner"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">TryHackMe — Ruta Cybersecurity 101</h3>
+            <span class="roadmap-badge">En curso · ~40%</span>
+          </div>
+          <p class="text-slate-400 text-sm">Nivel Hacker. Fundamentos prácticos de ciberseguridad ofensiva y defensiva.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="roadmap-node"><i class="fas fa-lock"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">Jira Service Management Fundamentals</h3>
+            <span class="roadmap-badge">Planeado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Gestión de tickets e incidencias en entornos de soporte IT.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="roadmap-node"><i class="fas fa-lock"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">AZ-900 — Microsoft Azure Fundamentals</h3>
+            <span class="roadmap-badge">Planeado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Fundamentos de computación en la nube con Microsoft Azure.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="roadmap-node"><i class="fas fa-lock"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">ITIL 4 Foundation</h3>
+            <span class="roadmap-badge">Planeado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Fundamentos de gestión de servicios TI.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="roadmap-node"><i class="fas fa-lock"></i></div>
+        <div class="glass-effect rounded-lg p-5">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-bold text-slate-100">MD-102 — Microsoft 365 Endpoint Administrator</h3>
+            <span class="roadmap-badge">Planeado</span>
+          </div>
+          <p class="text-slate-400 text-sm">Administración de dispositivos y servicios en la nube con Microsoft 365 (Intune).</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Reto CTF -->
+  <section id="ctf" class="section py-20 md:py-32">
+    <h2 class="text-3xl font-bold text-slate-100 mb-12 flex items-center ciber-heading">Reto CTF <span class="flex-grow h-px bg-slate-700 ml-4"></span></h2>
+    <div id="terminal" class="w-full max-w-4xl mx-auto h-[400px] glass-effect rounded-lg overflow-hidden flex flex-col font-mono text-sm" onclick="document.getElementById('terminal-input').focus()">
+      <div class="bg-slate-800/50 p-2 flex items-center justify-between">
+        <div class="flex space-x-2"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div></div>
+        <div class="text-slate-400 text-[10px]">brian@portfolio: ~</div>
+        <div></div>
+      </div>
+      <div id="terminal-body" class="flex-grow p-4 overflow-y-auto text-slate-300 space-y-1"></div>
+      <div class="bg-gray-900 p-2 flex items-center">
+        <span id="terminal-prompt" class="text-xs"></span>
+        <input type="text" id="terminal-input" class="bg-transparent border-none text-slate-300 w-full ml-2 focus:outline-none" autocomplete="off" aria-label="Terminal de comandos">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="section py-20 md:py-32 text-center max-w-2xl mx-auto">
+    <h2 class="text-3xl font-bold text-slate-100 mb-4">Contacto</h2>
+    <p class="text-slate-400 mb-10">¿Buscas un perfil técnico para tu equipo? Mi bandeja de entrada siempre está abierta.</p>
+    <a href="mailto:briangarcia5558@gmail.com" class="inline-flex px-10 py-4 border-2 border-[#64ffda] text-[#64ffda] font-bold rounded-md hover:bg-[#64ffda] hover:text-[#0a192f] transition-all uppercase tracking-widest text-xs">¡Di Hola!</a>
+    <div class="flex space-x-8 justify-center text-3xl text-slate-400 mt-12">
+      <a href="https://www.linkedin.com/in/brian-garcia-sec/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-[#64ffda] transition-colors"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/BrianG25" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-[#64ffda] transition-colors"><i class="fab fa-github"></i></a>
+      <a href="https://tryhackme.com/p/BryanG" target="_blank" rel="noopener noreferrer" aria-label="TryHackMe" class="hover:text-[#64ffda] transition-colors"><i class="fas fa-cube"></i></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- VISTA: TOOLS -->
+<main id="tools-view" class="view-hidden container mx-auto px-4 sm:px-6 pt-32 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
+      <h2 class="text-4xl font-bold text-slate-100 ciber-heading">Cybersecurity <span class="text-[#64ffda] font-mono">Toolkit</span></h2>
+      <button onclick="showView('portfolio')" class="text-slate-400 hover:text-[#64ffda] transition-colors flex items-center font-mono">
+        <i class="fas fa-arrow-left mr-2"></i> Volver al Inicio
+      </button>
+    </div>
+
+    <!-- CATEGORÍA: NETWORKING & ASIR -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Networking & ASIR</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-network-wired mr-2"></i>IP Class Identifier</h4>
+          <input type="text" id="ip-class-input" placeholder="Ej: 192.168.1.1" class="tool-input w-full p-2 rounded font-mono text-sm">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+              <p class="text-[9px] text-slate-500 uppercase">Clase</p>
+              <span id="ip-class-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
+            </div>
+            <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+              <p class="text-[9px] text-slate-500 uppercase">Tipo</p>
+              <span id="ip-type-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-search mr-2"></i>MAC OUI Lookup</h4>
+          <input type="text" id="mac-input" placeholder="Ej: 00:1A:2B" class="tool-input w-full p-2 rounded font-mono text-sm">
+          <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+            <p class="text-[9px] text-slate-500 uppercase mb-1">Resultado</p>
+            <span id="mac-res" class="text-slate-100 font-mono text-xs italic">---</span>
+          </div>
+        </div>
+
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">Subnet Calculator</h4>
+          <div class="flex items-center space-x-2">
+            <span class="text-slate-100">/</span>
+            <input type="number" id="cidr-input" min="0" max="32" placeholder="24" class="tool-input w-full p-2 rounded font-mono text-sm">
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-[10px] font-mono">
+            <div class="bg-slate-900/50 p-2 rounded">Mask: <span id="mask-out" class="text-[#64ffda]">255.255.255.0</span></div>
+            <div class="bg-slate-900/50 p-2 rounded">Hosts: <span id="hosts-out" class="text-[#64ffda]">254</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORÍA: CONVERSIÓN DE BASES -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Conversión de Bases</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Binario</h4>
+          <input type="number" id="d-b" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
+          <input type="text" id="b-d" placeholder="Binario" class="tool-input w-full p-1 rounded font-mono text-xs">
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Hex</h4>
+          <input type="number" id="d-h" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
+          <input type="text" id="h-d" placeholder="Hex" class="tool-input w-full p-1 rounded font-mono text-xs">
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Texto <-> Binario</h4>
+          <input type="text" id="t-b" placeholder="Texto..." class="tool-input w-full p-1 rounded font-mono text-xs">
+          <textarea id="b-t" placeholder="Binario..." class="tool-input w-full p-1 rounded font-mono text-[9px] h-12 resize-none"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORÍA: SEGURIDAD -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Seguridad & Cripto</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">SHA-256 Hasher</h4>
+          <input type="text" id="hash-in" placeholder="Texto plano..." class="tool-input w-full p-2 rounded font-mono text-xs">
+          <div id="hash-out" class="bg-slate-900/50 p-2 rounded border border-slate-700 text-[9px] font-mono text-[#64ffda] break-all">---</div>
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">Pass Generator</h4>
+          <input type="range" id="pass-len" min="8" max="64" value="20" class="w-full accent-[#64ffda]">
+          <div class="flex justify-between text-[9px] text-slate-500"><span>LEN</span> <span id="pass-len-val">20</span></div>
+          <input type="text" id="pass-res" readonly class="tool-input w-full p-1 rounded font-mono text-center text-xs">
+          <button onclick="genP()" class="w-full bg-[#64ffda]/10 text-[#64ffda] py-2 rounded border border-[#64ffda]/30 font-bold text-[10px] hover:bg-[#64ffda]/20 transition-all uppercase">Generar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="py-12 border-t border-slate-800/50 mt-20">
+  <p class="text-sm font-mono text-center text-slate-500">Brian Garcia © 2026 | ASIR & Cybersecurity Portfolio</p>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+// --- NAVEGACIÓN SPA ---
+function showView(viewId, sectionId = null) {
+  const pv = document.getElementById('portfolio-view'), tv = document.getElementById('tools-view');
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.add('hidden');
+
+  if (viewId === 'portfolio') {
+    tv.classList.add('view-hidden');
+    pv.classList.remove('view-hidden');
+    if (sectionId) {
+      setTimeout(() => {
+        const target = document.getElementById(sectionId);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } else {
+    pv.classList.add('view-hidden');
+    tv.classList.remove('view-hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// --- LÓGICA DE TOOLS ---
+
+// 1. IP Classifier (con validación de octetos)
+document.getElementById('ip-class-input').oninput = function() {
+  const ip = this.value.trim();
+  const resClass = document.getElementById('ip-class-res');
+  const resType = document.getElementById('ip-type-res');
+
+  if (!ip) { resClass.innerText = "---"; resType.innerText = "---"; this.classList.remove('tool-error'); return; }
+
+  const parts = ip.split('.');
+  const validFormat = parts.length === 4 && parts.every(p => /^\d{1,3}$/.test(p) && parseInt(p) <= 255);
+
+  if (!validFormat) {
+    resClass.innerText = "Inválida";
+    resType.innerText = "---";
+    this.classList.add('tool-error');
+    return;
+  }
+  this.classList.remove('tool-error');
+
+  const first = parseInt(parts[0]);
+  const second = parseInt(parts[1]);
+  let cls = "Inválida", type = "---";
+
+  if (first >= 1 && first <= 126) cls = "Clase A";
+  else if (first >= 128 && first <= 191) cls = "Clase B";
+  else if (first >= 192 && first <= 223) cls = "Clase C";
+  else if (first >= 224 && first <= 239) cls = "Clase D (Multicast)";
+  else if (first >= 240) cls = "Clase E (Reservada)";
+  else if (first === 127) cls = "Loopback";
+
+  if (first === 10) type = "Privada";
+  else if (first === 172 && second >= 16 && second <= 31) type = "Privada";
+  else if (first === 192 && second === 168) type = "Privada";
+  else if (first === 127) type = "Loopback";
+  else if (cls === "Clase A" || cls === "Clase B" || cls === "Clase C") type = "Pública";
+
+  resClass.innerText = cls;
+  resType.innerText = type;
+};
+
+// 2. MAC Lookup
+document.getElementById('mac-input').oninput = function() {
+  const val = this.value.toUpperCase().replace(/[:.-]/g, "").substring(0, 6);
+  const db = { "00000C": "Cisco", "000C29": "VMware", "080027": "VirtualBox", "28CFDA": "Apple", "0016EA": "Intel" };
+  document.getElementById('mac-res').innerText = val ? (db[val] || "No encontrado en la BD local") : "---";
+};
+
+// 3. Subnetting
+document.getElementById('cidr-input').oninput = function() {
+  let cidr = parseInt(this.value);
+  if (isNaN(cidr) || cidr < 0) { document.getElementById('mask-out').innerText = "---"; document.getElementById('hosts-out').innerText = "---"; return; }
+  if (cidr > 32) cidr = 32;
+  let mask = []; let temp = cidr;
+  for (let i = 0; i < 4; i++) { let n = Math.min(temp, 8); mask.push(256 - Math.pow(2, 8 - n)); temp -= n; }
+  document.getElementById('mask-out').innerText = mask.join('.');
+  document.getElementById('hosts-out').innerText = cidr >= 31 ? 0 : (Math.pow(2, 32 - cidr) - 2).toLocaleString();
+};
+
+// 4. Conversores Duales (con validación, sin NaN visible)
+function setupDual(id1, id2, f1, f2) {
+  const e1 = document.getElementById(id1), e2 = document.getElementById(id2);
+  e1.oninput = () => {
+    if (!e1.value) { e2.value = ""; return; }
+    const out = f1(e1.value);
+    e2.value = (out === null || Number.isNaN(out)) ? "" : out;
+  };
+  e2.oninput = () => {
+    if (!e2.value) { e1.value = ""; return; }
+    const out = f2(e2.value);
+    e1.value = (out === null || Number.isNaN(out)) ? "" : out;
+  };
+}
+setupDual('d-b', 'b-d',
+  v => { const n = parseInt(v, 10); return Number.isNaN(n) ? null : n.toString(2); },
+  v => { const n = parseInt(v, 2); return Number.isNaN(n) ? null : n; }
+);
+setupDual('d-h', 'h-d',
+  v => { const n = parseInt(v, 10); return Number.isNaN(n) ? null : n.toString(16).toUpperCase(); },
+  v => { const n = parseInt(v, 16); return Number.isNaN(n) ? null : n; }
+);
+setupDual('t-b', 'b-t',
+  v => v.split('').map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '),
+  v => v.trim().split(/\s+/).map(b => { const n = parseInt(b, 2); return Number.isNaN(n) ? '' : String.fromCharCode(n); }).join('')
+);
+
+// 5. Crypto & Pass
+document.getElementById('hash-in').oninput = async function() {
+  if (!this.value) { document.getElementById('hash-out').innerText = "---"; return; }
+  const b = new TextEncoder().encode(this.value);
+  const h = await crypto.subtle.digest('SHA-256', b);
+  document.getElementById('hash-out').innerText = Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
+};
+
+function genP() {
+  const l = document.getElementById('pass-len').value;
+  const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+  let r = ""; for (let i = 0; i < l; i++) r += c.charAt(Math.floor(Math.random() * c.length));
+  document.getElementById('pass-res').value = r;
+}
+document.getElementById('pass-len').oninput = function() { document.getElementById('pass-len-val').innerText = this.value; };
+
+// --- INICIALIZACIÓN ---
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('mobile-menu-button');
+  menuBtn.onclick = () => {
+    const isHidden = document.getElementById('mobile-menu').classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isHidden));
+  };
+
+  particlesJS('particles-js', {
+    "particles": {
+      "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+      "color": { "value": "#64ffda" },
+      "shape": { "type": "triangle" },
+      "opacity": { "value": 0.2, "random": true },
+      "size": { "value": 2, "random": true },
+      "line_linked": { "enable": true, "distance": 150, "color": "#64ffda", "opacity": 0.1, "width": 1 },
+      "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out", "bounce": false }
+    }
+  });
+
+  const obs = new IntersectionObserver(ents => ents.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: 0.1 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+  const ti = document.getElementById('terminal-input'), tb = document.getElementById('terminal-body'), tp = document.getElementById('terminal-prompt');
+  if (tp) tp.innerHTML = `<span class="text-slate-600">brian@portfolio</span><span class="text-[#64ffda]">:~$</span>`;
+
+  const SECTIONS = ['inicio', 'sobre-mi', 'habilidades', 'proyectos', 'writeups', 'formacion', 'ctf', 'contacto'];
+
+  if (ti) ti.onkeydown = (e) => {
+    if (e.key !== 'Enter') return;
+    const v = ti.value.trim();
+    const l = document.createElement('div');
+    l.innerHTML = `<span class="text-[#64ffda]">$ ${v}</span>`;
+    tb.appendChild(l);
+
+    if (v === 'help') {
+      tb.innerHTML += "<div class='text-[10px] opacity-60'>Comandos: ls, whoami, tools, clear</div>";
+    } else if (v === 'ls') {
+      tb.innerHTML += `<div class='text-[10px] opacity-60'>${SECTIONS.join('  ')}</div>`;
+    } else if (v === 'whoami') {
+      tb.innerHTML += "<div class='text-[10px] opacity-60'>Brian Garcia — Técnico ASIR & Ciberseguridad</div>";
+    } else if (v === 'tools') {
+      showView('tools');
+    } else if (v === 'clear') {
+      tb.innerHTML = "";
+    } else if (v) {
+      tb.innerHTML += `<div class='text-[10px] opacity-60'>Comando no reconocido: ${v}. Escribe 'help' para ver la lista.</div>`;
+    }
+    ti.value = "";
+    tb.scrollTop = tb.scrollHeight;
+  };
+});
+</script>
 </body>
 </html>
