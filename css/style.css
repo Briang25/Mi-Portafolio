@@ -217,3 +217,26 @@ section[id] { scroll-margin-top: 5rem; }
   .section { transition: none; }
   .animate-silhouette, .roadmap-item.current .roadmap-node { animation: none; }
 }
+
+/* --- LOGO CON CURSOR DE TERMINAL --- */
+.logo-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 8ch;                                   /* "Brian G." = 8 caracteres */
+  animation: logo-type 1.2s steps(8, end) 0.3s both;
+}
+.logo-cursor {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.1em;
+  margin-left: 2px;
+  background: #64ffda;
+  animation: logo-blink 1s steps(1, end) infinite;
+}
+@keyframes logo-type { from { width: 0; } to { width: 8ch; } }
+@keyframes logo-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .logo-text { animation: none; }
+  .logo-cursor { animation: none; }
+}
