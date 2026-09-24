@@ -27,7 +27,7 @@ const FS = {
         },
         'sistemas-asir.txt': {
           type: 'file',
-          content: 'Windows Server & Linux (Ubuntu)\nVirtualización (VirtualBox, VMware)\nProtocolos: HTTP, DNS, SSH, FTP\nBackups y recuperación de desastres'
+          content: 'Windows Server & Linux\nVirtualización (VirtualBox, VMware)\nProtocolos: HTTP, DNS, SSH, FTP\nBackups y recuperación de desastres'
         }
       }
     },
