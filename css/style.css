@@ -169,3 +169,51 @@ body {
 .term-muted { color: #64748b; }
 .term-prompt-user { color: #64ffda; }
 .term-prompt-path { color: #93c5fd; }
+
+/* --- ADAPTACIÓN A MÓVIL --- */
+html { scroll-padding-top: 5rem; }            /* el header fijo no tapa el título al saltar a un ancla */
+section[id] { scroll-margin-top: 5rem; }
+
+#inicio {
+  min-height: 100vh;
+  min-height: 100svh;                          /* respeta la barra del navegador móvil */
+  padding-top: 6rem;                           /* deja libre el header fijo */
+  padding-bottom: 3rem;
+}
+
+#mobile-menu {
+  max-height: calc(100vh - 4.5rem);
+  max-height: calc(100svh - 4.5rem);
+  overflow-y: auto;                            /* si no cabe (móvil en horizontal), se puede hacer scroll */
+  overscroll-behavior: contain;
+  border-top: 1px solid rgba(100, 255, 218, 0.15);
+  box-shadow: 0 12px 24px rgba(2, 12, 27, 0.6);
+}
+#mobile-menu a {
+  display: block;
+  padding: 0.85rem 0.5rem;                     /* objetivo táctil ≥ 44px */
+  min-height: 44px;
+}
+#mobile-menu a::after { display: none; }       /* sin subrayado animado en táctil */
+#mobile-menu-button {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  #terminal { height: 320px !important; }
+  #terminal-input, .tool-input { font-size: 16px; }         /* evita el zoom automático de iOS al enfocar */
+  .roadmap { padding-left: 2.25rem; }
+  .section { padding-top: 4rem; padding-bottom: 4rem; }
+  main, .content-container { overflow-wrap: anywhere; }
+}
+@media (max-width: 400px) {
+  h1 { font-size: 2.25rem; line-height: 1.1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section { transition: none; }
+  .animate-silhouette, .roadmap-item.current .roadmap-node { animation: none; }
+}
