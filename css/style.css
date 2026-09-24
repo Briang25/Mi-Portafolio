@@ -240,3 +240,8 @@ section[id] { scroll-margin-top: 5rem; }
   .logo-text { animation: none; }
   .logo-cursor { animation: none; }
 }
+
+/* El selector por id de arriba anula md:hidden de Tailwind: se oculta el botón hamburguesa en escritorio */
+@media (min-width: 768px) {
+  #mobile-menu-button, #mobile-menu { display: none !important; }
+}
