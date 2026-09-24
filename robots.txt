@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://briang25.github.io/Mi-Portafolio/sitemap.xml
