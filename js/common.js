@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!menu.classList.contains("hidden") && !menu.contains(e.target) && !menuBtn.contains(e.target)) setMenu(false);
     });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
-    window.matchMedia("(min-width: 768px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
+    window.matchMedia("(min-width: 1280px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
   }
 
   // Fondo de partículas (más denso en escritorio; en móvil, cantidad fija y ligera para no gastar batería)

@@ -241,7 +241,7 @@ section[id] { scroll-margin-top: 5rem; }
   .logo-cursor { animation: none; }
 }
 
-/* El selector por id de arriba anula md:hidden de Tailwind: se oculta el botón hamburguesa en escritorio */
-@media (min-width: 768px) {
+/* El selector por id anula xl:hidden de Tailwind: se oculta el botón hamburguesa cuando cabe el menú completo (≥1280px). Por debajo, incluso tablets y "sitio de escritorio" en móvil usan hamburguesa. */
+@media (min-width: 1280px) {
   #mobile-menu-button, #mobile-menu { display: none !important; }
 }
