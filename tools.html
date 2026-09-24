@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Toolkit de ciberseguridad de Brian Garcia: calculadora de subredes, identificador de clases IP, lookup de MAC, conversores de bases y generador de contraseñas.">
+<title>Toolkit - Brian Garcia</title>
+
+<meta property="og:title" content="Cybersecurity Toolkit - Brian Garcia">
+<meta property="og:description" content="Herramientas interactivas de redes y ciberseguridad: IP, MAC, subnetting, conversores de bases, hashing y contraseñas.">
+<meta property="og:image" content="https://briang25.github.io/Mi-Portafolio/assets/foto_perfil.png">
+<meta property="og:url" content="https://briang25.github.io/Mi-Portafolio/tools.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a192f%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 fill=%22%2364ffda%22 text-anchor=%22middle%22 font-family=%22monospace%22>B</text></svg>">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="w-full">
+<div id="particles-js"></div>
+<div class="content-container">
+
+<!-- HEADER -->
+<header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <a href="index.html#inicio" class="text-2xl font-bold text-[#64ffda] font-mono cursor-pointer">Brian G.</a>
+    <div class="hidden md:flex space-x-8">
+      <a href="index.html#sobre-mi" class="nav-link font-medium">Sobre Mí</a>
+      <a href="index.html#habilidades" class="nav-link font-medium">Competencias</a>
+      <a href="index.html#proyectos" class="nav-link font-medium">Proyectos</a>
+      <a href="index.html#writeups" class="nav-link font-medium">Write-ups</a>
+      <a href="index.html#formacion" class="nav-link font-medium">Formación</a>
+      <a href="tools.html" class="nav-link active"><i class="fas fa-toolbox mr-1"></i>Tools</a>
+      <a href="index.html#ctf" class="nav-link font-medium">Reto CTF</a>
+      <a href="index.html#contacto" class="nav-link font-medium">Contacto</a>
+    </div>
+    <button id="mobile-menu-button" class="md:hidden text-2xl" aria-label="Abrir menú" aria-expanded="false">
+      <i class="fas fa-bars text-[#64ffda]"></i>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#112240] p-4 text-center space-y-4">
+    <a href="index.html#sobre-mi" class="block w-full py-2 nav-link">Sobre Mí</a>
+    <a href="index.html#habilidades" class="block w-full py-2 nav-link">Competencias</a>
+    <a href="index.html#proyectos" class="block w-full py-2 nav-link">Proyectos</a>
+    <a href="index.html#writeups" class="block w-full py-2 nav-link">Write-ups</a>
+    <a href="index.html#formacion" class="block w-full py-2 nav-link">Formación</a>
+    <a href="tools.html" class="block w-full py-2 nav-link"><i class="fas fa-toolbox mr-1"></i>Tools</a>
+    <a href="index.html#ctf" class="block w-full py-2 nav-link">Reto CTF</a>
+    <a href="index.html#contacto" class="block w-full py-2 nav-link">Contacto</a>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 sm:px-6 pt-32 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
+      <h2 class="text-4xl font-bold text-slate-100 ciber-heading">Cybersecurity <span class="text-[#64ffda] font-mono">Toolkit</span></h2>
+      <a href="index.html" class="text-slate-400 hover:text-[#64ffda] transition-colors flex items-center font-mono">
+        <i class="fas fa-arrow-left mr-2"></i> Volver al Inicio
+      </a>
+    </div>
+
+    <!-- CATEGORÍA: NETWORKING & ASIR -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Networking & ASIR</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-network-wired mr-2"></i>IP Class Identifier</h4>
+          <input type="text" id="ip-class-input" placeholder="Ej: 192.168.1.1" class="tool-input w-full p-2 rounded font-mono text-sm">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+              <p class="text-[9px] text-slate-500 uppercase">Clase</p>
+              <span id="ip-class-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
+            </div>
+            <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+              <p class="text-[9px] text-slate-500 uppercase">Tipo</p>
+              <span id="ip-type-res" class="text-[#64ffda] font-mono font-bold text-xs">---</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono"><i class="fas fa-search mr-2"></i>MAC OUI Lookup</h4>
+          <input type="text" id="mac-input" placeholder="Ej: 00:1A:2B" class="tool-input w-full p-2 rounded font-mono text-sm">
+          <div class="bg-slate-900/50 p-2 rounded border border-slate-800 text-center">
+            <p class="text-[9px] text-slate-500 uppercase mb-1">Resultado</p>
+            <span id="mac-res" class="text-slate-100 font-mono text-xs italic">---</span>
+          </div>
+        </div>
+
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">Subnet Calculator</h4>
+          <div class="flex items-center space-x-2">
+            <span class="text-slate-100">/</span>
+            <input type="number" id="cidr-input" min="0" max="32" placeholder="24" class="tool-input w-full p-2 rounded font-mono text-sm">
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-[10px] font-mono">
+            <div class="bg-slate-900/50 p-2 rounded">Mask: <span id="mask-out" class="text-[#64ffda]">255.255.255.0</span></div>
+            <div class="bg-slate-900/50 p-2 rounded">Hosts: <span id="hosts-out" class="text-[#64ffda]">254</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORÍA: CONVERSIÓN DE BASES -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Conversión de Bases</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Binario</h4>
+          <input type="number" id="d-b" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
+          <input type="text" id="b-d" placeholder="Binario" class="tool-input w-full p-1 rounded font-mono text-xs">
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Decimal <-> Hex</h4>
+          <input type="number" id="d-h" placeholder="Decimal" class="tool-input w-full p-1 rounded font-mono text-xs">
+          <input type="text" id="h-d" placeholder="Hex" class="tool-input w-full p-1 rounded font-mono text-xs">
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-md font-bold text-[#64ffda] font-mono">Texto <-> Binario</h4>
+          <input type="text" id="t-b" placeholder="Texto..." class="tool-input w-full p-1 rounded font-mono text-xs">
+          <textarea id="b-t" placeholder="Binario..." class="tool-input w-full p-1 rounded font-mono text-[9px] h-12 resize-none"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORÍA: SEGURIDAD -->
+    <div class="mb-16">
+      <h3 class="text-2xl font-bold text-slate-100 mb-8 category-title font-mono uppercase tracking-widest text-sm">Seguridad & Cripto</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">SHA-256 Hasher</h4>
+          <input type="text" id="hash-in" placeholder="Texto plano..." class="tool-input w-full p-2 rounded font-mono text-xs">
+          <div id="hash-out" class="bg-slate-900/50 p-2 rounded border border-slate-700 text-[9px] font-mono text-[#64ffda] break-all">---</div>
+        </div>
+        <div class="glass-effect rounded-lg p-6 space-y-4">
+          <h4 class="text-lg font-bold text-[#64ffda] font-mono">Pass Generator</h4>
+          <input type="range" id="pass-len" min="8" max="64" value="20" class="w-full accent-[#64ffda]">
+          <div class="flex justify-between text-[9px] text-slate-500"><span>LEN</span> <span id="pass-len-val">20</span></div>
+          <input type="text" id="pass-res" readonly class="tool-input w-full p-1 rounded font-mono text-center text-xs">
+          <button onclick="genP()" class="w-full bg-[#64ffda]/10 text-[#64ffda] py-2 rounded border border-[#64ffda]/30 font-bold text-[10px] hover:bg-[#64ffda]/20 transition-all uppercase">Generar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="py-12 border-t border-slate-800/50 mt-20">
+  <p class="text-sm font-mono text-center text-slate-500">Brian Garcia © 2026 | ASIR & Cybersecurity Portfolio</p>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="js/common.js" defer></script>
+<script src="js/tools.js" defer></script>
+</body>
+</html>
